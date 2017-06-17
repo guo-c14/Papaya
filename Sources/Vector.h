@@ -20,7 +20,7 @@ public:
 	double &x = element[0], &r = element[0];
 	double &y = element[1], &g = element[1];
 	double &z = element[2], &b = element[2];
-	Vector(double d): element{d, d, d} {}
+	Vector(double d = 0): element{d, d, d} {}
 	Vector(double x, double y, double z): element{x, y, z} {}
 	Vector(const Vector &v): element{v.x, v.y, v.z} {}
 	double operator[](int index) const {
@@ -34,6 +34,12 @@ public:
 	}
 	Vector operator-() const {
 		return Vector(-x, -y, -z);
+	}
+	Vector &operator=(const Vector &v) {
+		x = v.x;
+		y = v.y;
+		z = v.z;
+		return *this;
 	}
 	Vector &operator+=(const Vector &v) {
 		x += v.x;

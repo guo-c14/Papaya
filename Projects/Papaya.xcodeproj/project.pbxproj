@@ -27,6 +27,8 @@
 		A2FD95241EF48EE7000F01FF /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		A2FD952A1EF4917A000F01FF /* Vector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Vector.h; sourceTree = "<group>"; };
 		A2FD952B1EF4ADCC000F01FF /* Ray.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Ray.h; sourceTree = "<group>"; };
+		A2FD952C1EF4B961000F01FF /* Canvas.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Canvas.h; sourceTree = "<group>"; };
+		A2FD952D1EF4B9F5000F01FF /* Image.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Image.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,8 @@
 				A2FD95241EF48EE7000F01FF /* main.cpp */,
 				A2FD952A1EF4917A000F01FF /* Vector.h */,
 				A2FD952B1EF4ADCC000F01FF /* Ray.h */,
+				A2FD952D1EF4B9F5000F01FF /* Image.h */,
+				A2FD952C1EF4B961000F01FF /* Canvas.h */,
 			);
 			name = Papaya;
 			path = ../Sources;
