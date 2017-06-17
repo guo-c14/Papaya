@@ -25,6 +25,7 @@
 /* Begin PBXFileReference section */
 		A2FD951A1EF48E99000F01FF /* Papaya */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Papaya; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2FD95241EF48EE7000F01FF /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		A2FD952A1EF4917A000F01FF /* Vector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Vector.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +60,7 @@
 			isa = PBXGroup;
 			children = (
 				A2FD95241EF48EE7000F01FF /* main.cpp */,
+				A2FD952A1EF4917A000F01FF /* Vector.h */,
 			);
 			name = Papaya;
 			path = ../Sources;
