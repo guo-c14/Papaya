@@ -22,6 +22,7 @@ public:
 	double &z = element[2], &b = element[2];
 	Vector(double d): element{d, d, d} {}
 	Vector(double x, double y, double z): element{x, y, z} {}
+	Vector(const Vector &v): element{v.x, v.y, v.z} {}
 	double operator[](int index) const {
 		return element[index];
 	}
