@@ -44,14 +44,20 @@ int main(int argc, const char * argv[]) {
 	vector<Object *> list{
 		new Sphere({0.0, 0.0, -4.0}, 2.0, new Metal({0.8, 0.6, 0.8}, 0.3)),
 		new Sphere({4.0, 0.0, -4.0}, 2.0, new Diffuse({0.3, 0.8, 0.3})),
-		new Sphere({-4.0, 0.0, -4.0}, 2.0, new Diffuse({0.8, 0.3, 0.8})),
+		new Sphere({-4.0, 0.0, -4.0}, 2.0, new Dielectric(1.5)),
 		new Sphere({0.0, -402, -4.0}, 400.0, new Metal({0.8, 0.6, 0.2}, 0.04))
 	};
 	Object *world = new ObjectList(list);
 	int width = 800;
 	int height = 400;
 	int ns = 100;
-	Camera camera;
+	Camera camera{
+		{-4.0, 5.0, 2.5},
+		{0.0, 0.0, -2.5},
+		{0.0, 1.0, 0.0},
+		90,
+		double(width) / double(height)
+	};
 	Canvas canvas;
 	canvas.pixels = vector<vector<Pixel>>(height);
 	for (int i = 0; i < height; i++) {

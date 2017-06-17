@@ -30,7 +30,7 @@ public:
 	}
 };
 
-class Metal : public Material {
+class Metal: public Material {
 public:
 	Vector albedo;
 	double fuzz;
@@ -41,7 +41,42 @@ public:
 		attenuation = albedo;
 		return dot(scattered.direction, rec.normal) > 0;
 	}
-	
 };
+
+class Dielectric: public Material {
+public:
+	double ref_idx;
+	Dielectric(double ri) : ref_idx(ri) {}
+	virtual bool scatter(const Ray &r_in, const HitRecord &rec, Vector &attenuation, Ray &scattered) const  {
+		Vector outward_normal;
+		Vector reflected = reflect(r_in.direction, rec.normal);
+		double ni_over_nt;
+		attenuation = Vector(1.0, 1.0, 1.0);
+		Vector refracted;
+		double reflect_prob;
+		double cosine;
+		if (dot(r_in.direction, rec.normal) > 0) {
+			outward_normal = -rec.normal;
+			ni_over_nt = ref_idx;
+			cosine = dot(r_in.direction, rec.normal) / norm(r_in.direction);
+			cosine = sqrt(1 - ref_idx * ref_idx * (1 - cosine * cosine));
+		}
+		else {
+			outward_normal = rec.normal;
+			ni_over_nt = 1.0 / ref_idx;
+			cosine = -dot(r_in.direction, rec.normal) /norm(r_in.direction);
+		}
+		if (refract(r_in.direction, outward_normal, ni_over_nt, refracted))
+			reflect_prob = schlick(cosine, ref_idx);
+		else
+			reflect_prob = 1.0;
+		if (drand48() < reflect_prob)
+			scattered = Ray(rec.p, reflected);
+		else
+			scattered = Ray(rec.p, refracted);
+		return true;
+	}
+};
+
 
 #endif /* Material_h */
