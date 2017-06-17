@@ -52,11 +52,13 @@ int main(int argc, const char * argv[]) {
 	int height = 400;
 	int ns = 100;
 	Camera camera{
-		{-4.0, 5.0, 2.5},
-		{0.0, 0.0, -2.5},
+		{12.0, 12.0, 6},
+		{0.0, 0.0, -4},
 		{0.0, 1.0, 0.0},
-		90,
-		double(width) / double(height)
+		20,
+		double(width) / double(height),
+		2.0,
+		distance({12.0, 12.0, 6}, {0.0, 0.0, -4})
 	};
 	Canvas canvas;
 	canvas.pixels = vector<vector<Pixel>>(height);
