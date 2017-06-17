@@ -15,10 +15,13 @@
 
 using std::vector;
 
+class Material;
+
 struct HitRecord {
 	double t;
 	Vector p;
 	Vector normal;
+	Material *material;
 };
 
 class Object {

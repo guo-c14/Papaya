@@ -15,22 +15,20 @@
 #include "Ray.h"
 #include "Camera.h"
 #include "Canvas.h"
+#include "Material.h"
 
 using std::vector;
 
-Vector random_in_unit_sphere() {
-	Vector p;
-	do {
-		p = 2.0 * Vector(drand48(), drand48(), drand48()) - 1.0;
-	} while (p.norm2() >= 1.0);
-	return p;
-}
-
-Pixel color(const Ray& r, Object *world) {
+Pixel color(const Ray &r, Object *world, int depth) {
 	HitRecord rec;
 	if (world->hit(r, 0.001, 0x1.fffffep+127f, rec)) {
-		Vector target = rec.p + rec.normal + random_in_unit_sphere();
-		return 0.5 * color(Ray(rec.p, target - rec.p), world);
+		Vector attenutation;
+		Ray scattered;
+		if (depth < 50 && rec.material->scatter(r, rec, attenutation, scattered)) {
+			return attenutation * color(scattered, world, depth + 1);
+		} else {
+			return 0;
+		}
 	}
 	else {
 		double t = 0.5 * r.direction.y + 0.5;
@@ -44,8 +42,10 @@ int main(int argc, const char * argv[]) {
 	Vector vertical(0.0, 2.0, 0.0);
 	Vector origin(0.0, 0.0, 0.0);
 	vector<Object *> list{
-		new Sphere({0.0, 0.0, -4.0}, 2.0),
-		new Sphere({0.0, -402, -4.0}, 400.0)
+		new Sphere({0.0, 0.0, -4.0}, 2.0, new Metal({0.8, 0.6, 0.8}, 0.3)),
+		new Sphere({4.0, 0.0, -4.0}, 2.0, new Diffuse({0.3, 0.8, 0.3})),
+		new Sphere({-4.0, 0.0, -4.0}, 2.0, new Diffuse({0.8, 0.3, 0.8})),
+		new Sphere({0.0, -402, -4.0}, 400.0, new Metal({0.8, 0.6, 0.2}, 0.04))
 	};
 	Object *world = new ObjectList(list);
 	int width = 800;
@@ -62,7 +62,7 @@ int main(int argc, const char * argv[]) {
 				double u = static_cast<double>(j + drand48()) / width;
 				double v = 1.0 - static_cast<double>(i + drand48()) / height;
 				Ray r(camera.getRay(u, v));
-				col += color(r, world);
+				col += color(r, world, 0);
 			}
 			col /= ns;
 			canvas.pixels[i][j] = {sqrt(col.x), sqrt(col.y), sqrt(col.z)};

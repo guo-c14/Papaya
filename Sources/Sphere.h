@@ -17,8 +17,12 @@ class Sphere: public Object {
 public:
 	Vector center;
 	double radius;
+	Material *material;
 	Sphere() {}
-	Sphere(Vector center, double radius): center(center), radius(radius) {}
+	Sphere(Vector center, double radius, Material *material):
+		center(center),
+		radius(radius),
+		material(material) {}
 	bool hit(const Ray &ray, double tMin, double tMax, HitRecord &record) const {
 		Vector oc = ray.origin - center;
 		double a = dot(ray.direction, ray.direction);
@@ -31,6 +35,7 @@ public:
 				record.t = temp;
 				record.p = ray.pointAt(record.t);
 				record.normal = (record.p - center) / radius;
+				record.material = material;
 				return true;
 			}
 			temp = (-b + sqrt(discriminant)) / a;
@@ -38,6 +43,7 @@ public:
 				record.t = temp;
 				record.p = ray.pointAt(record.t);
 				record.normal = (record.p - center) / radius;
+				record.material = material;
 				return true;
 			}
 		}
