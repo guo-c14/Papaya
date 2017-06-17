@@ -16,15 +16,15 @@ class Pixel: public Vector {
 public:
 	Pixel(double d = 0): Vector(d) {}
 	Pixel(double r, double g, double b): Vector(r, g, b) {}
-	Pixel(const Pixel &pixel): Vector(pixel.x, pixel.y, pixel.z) {}
+	Pixel(const Vector &v): Vector(v.x, v.y, v.z) {}
 	uint8_t r() const {
-		return x / norm() * 255;
+		return (x / norm() / 2 + 0.5) * 255.99;
 	}
 	uint8_t g() const {
-		return y / norm() * 255;
+		return (y / norm() / 2 + 0.5) * 255.99;
 	}
 	uint8_t b() const {
-		return z / norm() * 255;
+		return (z / norm() / 2 + 0.5) * 255.99;
 	}
 };
 

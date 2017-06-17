@@ -19,6 +19,7 @@ public:
 	Vector origin, direction;
 	Vector &a=origin, &A=origin;
 	Vector &b=direction, &B=direction;
+	Ray() {}
 	Ray(const Vector &a, const Vector &b): origin(a), direction(normalize(b)) {}
 	Ray(const Ray &ray): origin(ray.origin), direction(ray.direction) {}
 	Vector pointAt(double t) const {
