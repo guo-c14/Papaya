@@ -39,7 +39,7 @@ public:
 		bool hitAnything = false;
 		double closest = tMax;
 		for (int i = 0; i < list.size(); i++) {
-			if (list[i]->hit(ray, tMin, closest, tempRecord)) {
+			if (list[i] != nullptr && list[i]->hit(ray, tMin, closest, tempRecord)) {
 				hitAnything = true;
 				closest = tempRecord.t;
 				record = tempRecord;

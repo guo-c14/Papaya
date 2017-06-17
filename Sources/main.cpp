@@ -36,29 +36,57 @@ Pixel color(const Ray &r, Object *world, int depth) {
 	}
 }
 
+ObjectList *random_scene() {
+	vector<Object *> list(488);
+	list[0] =  new Sphere(Vector(0, -4000, 0), 4000, new Diffuse(Vector(0.5, 0.5, 0.5)));
+	int i = 1;
+	for (int a = -11; a < 11; a++) {
+		for (int b = -11; b < 11; b++) {
+			float choose_mat = drand48();
+			Vector center(4 * a + 3.6 * drand48(), 0.8, 4 * b + 3.6 * drand48());
+			if (distance(center, {16, 0.8, 0}) > 3.6) {
+				if (choose_mat < 0.8) {
+					list[i++] = new Sphere(center, 0.8, new Diffuse(Vector(drand48() * drand48(), drand48() * drand48(), drand48() * drand48())));
+				}
+				else if (choose_mat < 0.95) {
+					list[i++] = new Sphere(center, 0.8,
+										   new Metal(Vector(0.5 * (1 + drand48()), 0.5 * (1 + drand48()), 0.5 * (1 + drand48())), 0.5 * drand48()));
+				}
+				else {
+					list[i++] = new Sphere(center, 0.8, new Dielectric(1.5));
+				}
+			}
+		}
+	}
+	list[i++] = new Sphere(Vector(0, 4, 0), 4.0, new Dielectric(1.5));
+	list[i++] = new Sphere(Vector(-16, 4, 0), 4.0, new Diffuse(Vector(0.4, 0.2, 0.1)));
+	list[i++] = new Sphere(Vector(16, 4, 0), 4.0, new Metal(Vector(0.7, 0.6, 0.5), 0.0));
+	return new ObjectList(list);
+}
+
 int main(int argc, const char * argv[]) {
 	Vector low_left_corner(-2.0, -1.0, -1.0);
 	Vector horizontal(4.0, 0.0, 0.0);
 	Vector vertical(0.0, 2.0, 0.0);
 	Vector origin(0.0, 0.0, 0.0);
-	vector<Object *> list{
-		new Sphere({0.0, 0.0, -4.0}, 2.0, new Metal({0.8, 0.6, 0.8}, 0.3)),
-		new Sphere({4.0, 0.0, -4.0}, 2.0, new Diffuse({0.3, 0.8, 0.3})),
-		new Sphere({-4.0, 0.0, -4.0}, 2.0, new Dielectric(1.5)),
-		new Sphere({0.0, -402, -4.0}, 400.0, new Metal({0.8, 0.6, 0.2}, 0.04))
-	};
-	Object *world = new ObjectList(list);
+//	vector<Object *> list{
+//		new Sphere({0.0, 0.0, -4.0}, 2.0, new Metal({0.8, 0.6, 0.8}, 0.3)),
+//		new Sphere({4.0, 0.0, -4.0}, 2.0, new Diffuse({0.3, 0.8, 0.3})),
+//		new Sphere({-4.0, 0.0, -4.0}, 2.0, new Dielectric(1.5)),
+//		new Sphere({0.0, -402, -4.0}, 400.0, new Metal({0.8, 0.6, 0.2}, 0.04))
+//	};
+	Object *world = random_scene();
 	int width = 800;
 	int height = 400;
 	int ns = 100;
 	Camera camera{
-		{12.0, 12.0, 6},
-		{0.0, 0.0, -4},
+		{52.0, 8.0, 12.0},
+		{0.0, 0.0, 0.0},
 		{0.0, 1.0, 0.0},
 		20,
 		double(width) / double(height),
-		2.0,
-		distance({12.0, 12.0, 6}, {0.0, 0.0, -4})
+		0.1,
+		40.0
 	};
 	Canvas canvas;
 	canvas.pixels = vector<vector<Pixel>>(height);

@@ -19,3 +19,7 @@ C++ Path Tracer (路径追踪器)
 ### 焦散
 
 ![](Outputs/Defocus.ppm)
+
+### 随机场景
+
+![](Outputs/Random.ppm)

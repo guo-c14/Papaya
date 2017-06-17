@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		A2FD95251EF48EE7000F01FF /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2FD95241EF48EE7000F01FF /* main.cpp */; };
-		A2FD953C1EF576F0000F01FF /* Material.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2FD953A1EF576F0000F01FF /* Material.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -34,7 +33,6 @@
 		A2FD95311EF55746000F01FF /* Object.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Object.h; sourceTree = "<group>"; };
 		A2FD95351EF55868000F01FF /* Sphere.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sphere.h; sourceTree = "<group>"; };
 		A2FD95381EF569DF000F01FF /* Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
-		A2FD953A1EF576F0000F01FF /* Material.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Material.cpp; sourceTree = "<group>"; };
 		A2FD953B1EF576F0000F01FF /* Material.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Material.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -79,7 +77,6 @@
 				A2FD952D1EF4B9F5000F01FF /* Image.h */,
 				A2FD952C1EF4B961000F01FF /* Canvas.h */,
 				A2FD953B1EF576F0000F01FF /* Material.h */,
-				A2FD953A1EF576F0000F01FF /* Material.cpp */,
 			);
 			name = Papaya;
 			path = ../Sources;
@@ -143,7 +140,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A2FD95251EF48EE7000F01FF /* main.cpp in Sources */,
-				A2FD953C1EF576F0000F01FF /* Material.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
