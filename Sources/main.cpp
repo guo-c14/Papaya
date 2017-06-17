@@ -8,6 +8,7 @@
 
 #include <iostream>
 #include <vector>
+#include <cmath>
 #include "Vector.h"
 #include "Object.h"
 #include "Sphere.h"
@@ -17,10 +18,19 @@
 
 using std::vector;
 
+Vector random_in_unit_sphere() {
+	Vector p;
+	do {
+		p = 2.0 * Vector(drand48(), drand48(), drand48()) - 1.0;
+	} while (p.norm2() >= 1.0);
+	return p;
+}
+
 Pixel color(const Ray& r, Object *world) {
 	HitRecord rec;
-	if (world->hit(r, 0.0, 0x1.fffffep+127f, rec)) {
-		return 0.5 * rec.normal + 0.5;
+	if (world->hit(r, 0.001, 0x1.fffffep+127f, rec)) {
+		Vector target = rec.p + rec.normal + random_in_unit_sphere();
+		return 0.5 * color(Ray(rec.p, target - rec.p), world);
 	}
 	else {
 		double t = 0.5 * r.direction.y + 0.5;
@@ -34,12 +44,12 @@ int main(int argc, const char * argv[]) {
 	Vector vertical(0.0, 2.0, 0.0);
 	Vector origin(0.0, 0.0, 0.0);
 	vector<Object *> list{
-		new Sphere({0.0, 0.0, -1.0}, 0.5),
-		new Sphere({0.0, -100.5, -1.0}, 100.0)
+		new Sphere({0.0, 0.0, -4.0}, 2.0),
+		new Sphere({0.0, -402, -4.0}, 400.0)
 	};
 	Object *world = new ObjectList(list);
-	int width = 200;
-	int height = 100;
+	int width = 800;
+	int height = 400;
 	int ns = 100;
 	Camera camera;
 	Canvas canvas;
@@ -54,7 +64,8 @@ int main(int argc, const char * argv[]) {
 				Ray r(camera.getRay(u, v));
 				col += color(r, world);
 			}
-			canvas.pixels[i][j] = col / ns;
+			col /= ns;
+			canvas.pixels[i][j] = {sqrt(col.x), sqrt(col.y), sqrt(col.z)};
 		}
 	}
 	canvas.setImageFormat(ppm);
