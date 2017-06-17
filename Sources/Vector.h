@@ -17,9 +17,9 @@ using std::ostream;
 class Vector {
 public:
 	double element[3];
-	double &x = element[0], &r = element[0];
-	double &y = element[1], &g = element[1];
-	double &z = element[2], &b = element[2];
+	double &x = element[0];
+	double &y = element[1];
+	double &z = element[2];
 	Vector(double d = 0): element{d, d, d} {}
 	Vector(double x, double y, double z): element{x, y, z} {}
 	Vector(const Vector &v): element{v.x, v.y, v.z} {}

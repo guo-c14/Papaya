@@ -9,17 +9,18 @@
 #ifndef Canvas_h
 #define Canvas_h
 
-#include <cstdint>
+#include <string>
 #include <vector>
 #include "Image.h"
-#include "Vector.h"
+#include "Pixel.h"
 
+using std::string;
 using std::vector;
 
 class Canvas {
 	Image *image;
 public:
-	vector<vector<Vector>> pixels;
+	vector<vector<Pixel>> pixels;
 	void setImageFormat(ImageFormat format) {
 		switch (format) {
 			case ppm:
