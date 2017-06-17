@@ -12,6 +12,7 @@
 #include "Object.h"
 #include "Sphere.h"
 #include "Ray.h"
+#include "Camera.h"
 #include "Canvas.h"
 
 using std::vector;
@@ -39,15 +40,21 @@ int main(int argc, const char * argv[]) {
 	Object *world = new ObjectList(list);
 	int width = 200;
 	int height = 100;
+	int ns = 100;
+	Camera camera;
 	Canvas canvas;
 	canvas.pixels = vector<vector<Pixel>>(height);
 	for (int i = 0; i < height; i++) {
 		canvas.pixels[i] = vector<Pixel>(width);
 		for (int j = 0; j < width; j++) {
-			double u = 1.0 - static_cast<double>(i) / height;
-			double v = static_cast<double>(j) / width;
-			Ray r(origin, low_left_corner + u * vertical + v * horizontal);
-			canvas.pixels[i][j] = color(r, world);
+			Pixel col;
+			for (int k = 0; k < ns; k++) {
+				double u = static_cast<double>(j + drand48()) / width;
+				double v = 1.0 - static_cast<double>(i + drand48()) / height;
+				Ray r(camera.getRay(u, v));
+				col += color(r, world);
+			}
+			canvas.pixels[i][j] = col / ns;
 		}
 	}
 	canvas.setImageFormat(ppm);

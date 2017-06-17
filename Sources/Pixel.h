@@ -18,13 +18,16 @@ public:
 	Pixel(double r, double g, double b): Vector(r, g, b) {}
 	Pixel(const Vector &v): Vector(v.x, v.y, v.z) {}
 	uint8_t r() const {
-		return (x / norm() / 2 + 0.5) * 255.99;
+		return x * 255.99;
+		// return (x / norm() / 2 + 0.5) * 255.99;
 	}
 	uint8_t g() const {
-		return (y / norm() / 2 + 0.5) * 255.99;
+		return y * 255.99;
+		// return (y / norm() / 2 + 0.5) * 255.99;
 	}
 	uint8_t b() const {
-		return (z / norm() / 2 + 0.5) * 255.99;
+		return z * 255.99;
+		// return (z / norm() / 2 + 0.5) * 255.99;
 	}
 };
 

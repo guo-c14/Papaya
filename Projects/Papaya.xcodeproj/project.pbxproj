@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A2FD95251EF48EE7000F01FF /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2FD95241EF48EE7000F01FF /* main.cpp */; };
+		A2FD95391EF569DF000F01FF /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2FD95371EF569DF000F01FF /* Camera.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -32,6 +33,8 @@
 		A2FD95301EF4D64E000F01FF /* Pixel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Pixel.h; sourceTree = "<group>"; };
 		A2FD95311EF55746000F01FF /* Object.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Object.h; sourceTree = "<group>"; };
 		A2FD95351EF55868000F01FF /* Sphere.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sphere.h; sourceTree = "<group>"; };
+		A2FD95371EF569DF000F01FF /* Camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Camera.cpp; sourceTree = "<group>"; };
+		A2FD95381EF569DF000F01FF /* Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +69,8 @@
 			isa = PBXGroup;
 			children = (
 				A2FD95241EF48EE7000F01FF /* main.cpp */,
+				A2FD95381EF569DF000F01FF /* Camera.h */,
+				A2FD95371EF569DF000F01FF /* Camera.cpp */,
 				A2FD952A1EF4917A000F01FF /* Vector.h */,
 				A2FD952B1EF4ADCC000F01FF /* Ray.h */,
 				A2FD95311EF55746000F01FF /* Object.h */,
@@ -135,6 +140,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A2FD95391EF569DF000F01FF /* Camera.cpp in Sources */,
 				A2FD95251EF48EE7000F01FF /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
