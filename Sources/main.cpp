@@ -19,6 +19,7 @@
 #include "Material.h"
 #include "AABB.h"
 #include "BVHNode.h"
+#include "Texture.h"
 
 using std::vector;
 
@@ -41,17 +42,17 @@ Pixel color(const Ray &r, const Object *world, int depth) {
 
 ObjectList *random_scene() {
 	vector<Object *> list;
-	list.push_back(new Sphere(Vector(0, -4000, 0), 4000, new Diffuse(Vector(0.5, 0.5, 0.5))));
+	list.push_back(new Sphere(Vector(0, -4000, 0), 4000, new Diffuse(new ConstantTexture(Vector(0.5, 0.5, 0.5)))));
 	for (int a = -10; a < 10; a++) {
 		for (int b = -10; b < 10; b++) {
 			float choose_mat = drand48();
 			Vector center(4 * a + 3.6 * drand48(), 0.8, 4 * b + 3.6 * drand48());
 			if (distance(center, {16, 0.8, 0}) > 3.6) {
 				if (choose_mat < 0.4) {
-					list.push_back(new Sphere(center, 0.8, new Diffuse(Vector(drand48() * drand48(), drand48() * drand48(), drand48() * drand48()))));
+					list.push_back(new Sphere(center, 0.8, new Diffuse(new ConstantTexture(Vector(drand48() * drand48(), drand48() * drand48(), drand48() * drand48())))));
 				}
 				else if (choose_mat < 0.8) {
-					list.push_back(new MovingSphere(center, center + Vector(0, 2.0 * drand48(), 0), 0.0, 1.0, 0.8, new Diffuse(Vector(drand48() * drand48(), drand48() * drand48(), drand48() * drand48()))));
+					list.push_back(new MovingSphere(center, center + Vector(0, 2.0 * drand48(), 0), 0.0, 1.0, 0.8, new Diffuse(new ConstantTexture(Vector(drand48() * drand48(), drand48() * drand48(), drand48() * drand48())))));
 				}
 				else if (choose_mat < 0.88) {
 					list.push_back(new Sphere(center, 0.8, new Metal(Vector(0.5 * (1 + drand48()), 0.5 * (1 + drand48()), 0.5 * (1 + drand48())), 0.5 * drand48())));
@@ -68,41 +69,45 @@ ObjectList *random_scene() {
 		}
 	}
 	list.push_back(new Sphere(Vector(0, 4, 0), 4.0, new Dielectric(1.5)));
-	list.push_back(new Sphere(Vector(-16, 4, 0), 4.0, new Diffuse(Vector(0.4, 0.2, 0.1))));
+	list.push_back(new Sphere(Vector(-16, 4, 0), 4.0, new Diffuse(new ConstantTexture(Vector(0.4, 0.2, 0.1)))));
 	list.push_back(new Sphere(Vector(16, 4, 0), 4.0, new Metal(Vector(0.7, 0.6, 0.5), 0.0)));
 	return new ObjectList(list);
 }
 
 Object **random_scene1(int &i) {
+	Texture *texture = new CheckerTexture(new ConstantTexture({1.0, 1.0, 1.0}), new ConstantTexture({0.0118, 0.6627, 0.9725}));
 	Object **list = new Object *[500];
-	list[i++] = new Sphere(Vector(0, -4000, 0), 4000, new Diffuse(Vector(0.5, 0.5, 0.5)));
+	list[i++] = new Sphere(Vector(0, -4000, 0), 4000, new Diffuse(texture));
 	for (int a = -10; a < 10; a++) {
 		for (int b = -10; b < 10; b++) {
 			float choose_mat = drand48();
 			Vector center(4 * a + 3.6 * drand48(), 0.8, 4 * b + 3.6 * drand48());
 			if (distance(center, {16, 0.8, 0}) > 3.6) {
 				if (choose_mat < 0.4) {
-					list[i++] = new Sphere(center, 0.8, new Diffuse(Vector(drand48() * drand48(), drand48() * drand48(), drand48() * drand48())));
+					list[i++] = new Sphere(center, 0.8, new Diffuse(new ConstantTexture(Vector(drand48() * drand48(), drand48() * drand48(), drand48() * drand48()))));
 				}
 				else if (choose_mat < 0.8) {
-					list[i++] = new MovingSphere(center, center + Vector(0, 2.0 * drand48(), 0), 0.0, 1.0, 0.8, new Diffuse(Vector(drand48() * drand48(), drand48() * drand48(), drand48() * drand48())));
+//					list[i++] = new MovingSphere(center, center + Vector(0, 2.0 * drand48(), 0), 0.0, 1.0, 0.8, new Diffuse(new ConstantTexture(Vector(drand48() * drand48(), drand48() * drand48(), drand48() * drand48()))));
+					list[i++] = new Sphere(center, 0.8, new Diffuse(new ConstantTexture(Vector(drand48() * drand48(), drand48() * drand48(), drand48() * drand48()))));
 				}
 				else if (choose_mat < 0.88) {
 					list[i++] = new Sphere(center, 0.8, new Metal(Vector(0.5 * (1 + drand48()), 0.5 * (1 + drand48()), 0.5 * (1 + drand48())), 0.5 * drand48()));
 				}
 				else if (choose_mat < 0.96) {
-					list[i++] = new MovingSphere(center, center + Vector(0, 2.0 * drand48(), 0), 0.0, 1.0, 0.8, new Metal(Vector(0.5 * (1 + drand48()), 0.5 * (1 + drand48()), 0.5 * (1 + drand48())), 0.5 * drand48()));
+//					list[i++] = new MovingSphere(center, center + Vector(0, 2.0 * drand48(), 0), 0.0, 1.0, 0.8, new Metal(Vector(0.5 * (1 + drand48()), 0.5 * (1 + drand48()), 0.5 * (1 + drand48())), 0.5 * drand48()));
+					list[i++] = new Sphere(center, 0.8, new Metal(Vector(0.5 * (1 + drand48()), 0.5 * (1 + drand48()), 0.5 * (1 + drand48())), 0.5 * drand48()));
 				}
 				else if (choose_mat < 0.98)  {
 					list[i++] = new Sphere(center, 0.8, new Dielectric(1.5));
 				} else {
-					list[i++] = new MovingSphere(center, center + Vector(0, 2.0 * drand48(), 0), 0.0, 1.0, 0.8, new Dielectric(1.5));
+//					list[i++] = new MovingSphere(center, center + Vector(0, 2.0 * drand48(), 0), 0.0, 1.0, 0.8, new Dielectric(1.5));
+					list[i++] = new Sphere(center, 0.8, new Dielectric(1.5));
 				}
 			}
 		}
 	}
 	list[i++] = new Sphere(Vector(0, 4, 0), 4.0, new Dielectric(1.5));
-	list[i++] = new Sphere(Vector(-16, 4, 0), 4.0, new Diffuse(Vector(0.4, 0.2, 0.1)));
+	list[i++] = new Sphere(Vector(-16, 4, 0), 4.0, new Diffuse(new ConstantTexture(Vector(0.4, 0.2, 0.1))));
 	list[i++] = new Sphere(Vector(16, 4, 0), 4.0, new Metal(Vector(0.7, 0.6, 0.5), 0.0));
 	return list;
 }
@@ -141,8 +146,8 @@ int main(int argc, const char * argv[]) {
 		{0.0, 1.0, 0.0},
 		20,
 		double(width) / double(height),
-		0.1,
-		40.0,
+		0.6,
+		distance({52.0, 8.0, 12.0}, {0.0, 0.0, 0.0}),
 		0.0,
 		1.0
 	};

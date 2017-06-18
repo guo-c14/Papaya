@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A20C872D1EF6AABD00732DB6 /* AABB.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A20C872B1EF6AABD00732DB6 /* AABB.cpp */; };
-		A20C87301EF6B80100732DB6 /* BVHNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A20C872E1EF6B80100732DB6 /* BVHNode.cpp */; };
 		A2FD95251EF48EE7000F01FF /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2FD95241EF48EE7000F01FF /* main.cpp */; };
 /* End PBXBuildFile section */
 
@@ -25,10 +23,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		A20C872B1EF6AABD00732DB6 /* AABB.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AABB.cpp; sourceTree = "<group>"; };
 		A20C872C1EF6AABD00732DB6 /* AABB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AABB.h; sourceTree = "<group>"; };
-		A20C872E1EF6B80100732DB6 /* BVHNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BVHNode.cpp; sourceTree = "<group>"; };
 		A20C872F1EF6B80100732DB6 /* BVHNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BVHNode.h; sourceTree = "<group>"; };
+		A20C87321EF6C38100732DB6 /* Texture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Texture.h; sourceTree = "<group>"; };
 		A2FD951A1EF48E99000F01FF /* Papaya */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Papaya; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2FD95241EF48EE7000F01FF /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		A2FD952A1EF4917A000F01FF /* Vector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Vector.h; sourceTree = "<group>"; };
@@ -80,13 +77,12 @@
 				A2FD95311EF55746000F01FF /* Object.h */,
 				A2FD95351EF55868000F01FF /* Sphere.h */,
 				A20C872F1EF6B80100732DB6 /* BVHNode.h */,
-				A20C872E1EF6B80100732DB6 /* BVHNode.cpp */,
 				A2FD95381EF569DF000F01FF /* Camera.h */,
 				A2FD95301EF4D64E000F01FF /* Pixel.h */,
 				A2FD952D1EF4B9F5000F01FF /* Image.h */,
 				A2FD952C1EF4B961000F01FF /* Canvas.h */,
 				A20C872C1EF6AABD00732DB6 /* AABB.h */,
-				A20C872B1EF6AABD00732DB6 /* AABB.cpp */,
+				A20C87321EF6C38100732DB6 /* Texture.h */,
 			);
 			name = Papaya;
 			path = ../Sources;
@@ -150,8 +146,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A2FD95251EF48EE7000F01FF /* main.cpp in Sources */,
-				A20C87301EF6B80100732DB6 /* BVHNode.cpp in Sources */,
-				A20C872D1EF6AABD00732DB6 /* AABB.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

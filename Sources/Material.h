@@ -12,6 +12,7 @@
 #include "Vector.h"
 #include "Ray.h"
 #include "Object.h"
+#include "Texture.h"
 
 class Material  {
 public:
@@ -20,12 +21,12 @@ public:
 
 class Diffuse: public Material {
 public:
-	Vector albedo;
-	Diffuse(const Vector &a) : albedo(a) {}
+	Texture *albedo;
+	Diffuse(Texture *a) : albedo(a) {}
 	bool scatter(const Ray &r_in, const HitRecord &rec, Vector &attenuation, Ray &scattered) const {
 		Vector target = rec.p + rec.normal + random_in_unit_sphere();
 		scattered = Ray(rec.p, target - rec.p, r_in.time);
-		attenuation = albedo;
+		attenuation = albedo->value(0, 0, rec.p);
 		return true;
 	}
 };

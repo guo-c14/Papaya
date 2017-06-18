@@ -27,3 +27,7 @@ C++ Path Tracer (路径追踪器)
 ### 动态模糊
 
 ![](Outputs/Motion.ppm)
+
+### 固态纹理
+
+![](Outputs/Texture.ppm)
