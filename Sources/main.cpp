@@ -17,6 +17,8 @@
 #include "Camera.h"
 #include "Canvas.h"
 #include "Material.h"
+#include "AABB.h"
+#include "BVHNode.h"
 
 using std::vector;
 
@@ -38,9 +40,42 @@ Pixel color(const Ray &r, const Object *world, int depth) {
 }
 
 ObjectList *random_scene() {
-	vector<Object *> list(500);
-	list[0] =  new Sphere(Vector(0, -4000, 0), 4000, new Diffuse(Vector(0.5, 0.5, 0.5)));
-	int i = 1;
+	vector<Object *> list;
+	list.push_back(new Sphere(Vector(0, -4000, 0), 4000, new Diffuse(Vector(0.5, 0.5, 0.5))));
+	for (int a = -10; a < 10; a++) {
+		for (int b = -10; b < 10; b++) {
+			float choose_mat = drand48();
+			Vector center(4 * a + 3.6 * drand48(), 0.8, 4 * b + 3.6 * drand48());
+			if (distance(center, {16, 0.8, 0}) > 3.6) {
+				if (choose_mat < 0.4) {
+					list.push_back(new Sphere(center, 0.8, new Diffuse(Vector(drand48() * drand48(), drand48() * drand48(), drand48() * drand48()))));
+				}
+				else if (choose_mat < 0.8) {
+					list.push_back(new MovingSphere(center, center + Vector(0, 2.0 * drand48(), 0), 0.0, 1.0, 0.8, new Diffuse(Vector(drand48() * drand48(), drand48() * drand48(), drand48() * drand48()))));
+				}
+				else if (choose_mat < 0.88) {
+					list.push_back(new Sphere(center, 0.8, new Metal(Vector(0.5 * (1 + drand48()), 0.5 * (1 + drand48()), 0.5 * (1 + drand48())), 0.5 * drand48())));
+				}
+				else if (choose_mat < 0.96) {
+					list.push_back(new MovingSphere(center, center + Vector(0, 2.0 * drand48(), 0), 0.0, 1.0, 0.8, new Metal(Vector(0.5 * (1 + drand48()), 0.5 * (1 + drand48()), 0.5 * (1 + drand48())), 0.5 * drand48())));
+				}
+				else if (choose_mat < 0.98)  {
+					list.push_back(new Sphere(center, 0.8, new Dielectric(1.5)));
+				} else {
+					list.push_back(new MovingSphere(center, center + Vector(0, 2.0 * drand48(), 0), 0.0, 1.0, 0.8, new Dielectric(1.5)));
+				}
+			}
+		}
+	}
+	list.push_back(new Sphere(Vector(0, 4, 0), 4.0, new Dielectric(1.5)));
+	list.push_back(new Sphere(Vector(-16, 4, 0), 4.0, new Diffuse(Vector(0.4, 0.2, 0.1))));
+	list.push_back(new Sphere(Vector(16, 4, 0), 4.0, new Metal(Vector(0.7, 0.6, 0.5), 0.0)));
+	return new ObjectList(list);
+}
+
+Object **random_scene1(int &i) {
+	Object **list = new Object *[500];
+	list[i++] = new Sphere(Vector(0, -4000, 0), 4000, new Diffuse(Vector(0.5, 0.5, 0.5)));
 	for (int a = -10; a < 10; a++) {
 		for (int b = -10; b < 10; b++) {
 			float choose_mat = drand48();
@@ -69,7 +104,7 @@ ObjectList *random_scene() {
 	list[i++] = new Sphere(Vector(0, 4, 0), 4.0, new Dielectric(1.5));
 	list[i++] = new Sphere(Vector(-16, 4, 0), 4.0, new Diffuse(Vector(0.4, 0.2, 0.1)));
 	list[i++] = new Sphere(Vector(16, 4, 0), 4.0, new Metal(Vector(0.7, 0.6, 0.5), 0.0));
-	return new ObjectList(list);
+	return list;
 }
 
 void call_from_thread(vector<vector<Pixel>> &pixels, int startRow, int endRow, int width, int height, const Camera &camera, const Object *world) {
@@ -94,7 +129,10 @@ int main(int argc, const char * argv[]) {
 	Vector horizontal(4.0, 0.0, 0.0);
 	Vector vertical(0.0, 2.0, 0.0);
 	Vector origin(0.0, 0.0, 0.0);
-	Object *world = random_scene();
+//	Object *world = random_scene();
+	int i = 0;
+	Object **list = random_scene1(i);
+	Object *world = new BVHNode(list, i, 0, 1);
 	int width = 800;
 	int height = 400;
 	Camera camera{

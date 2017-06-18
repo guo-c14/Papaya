@@ -12,6 +12,7 @@
 #include <vector>
 #include "Vector.h"
 #include "Ray.h"
+#include "AABB.h"
 
 using std::vector;
 
@@ -27,6 +28,7 @@ struct HitRecord {
 class Object {
 public:
 	virtual bool hit(const Ray &ray, double tMin, double tMax, HitRecord &record) const = 0;
+	virtual bool boundingBox(double t0, double t1, AABB &box) const = 0;
 };
 
 class ObjectList: public Object {
@@ -47,6 +49,27 @@ public:
 		}
 		return hitAnything;
 	}
+	bool boundingBox(double t0, double t1, AABB &box) const {
+		if (list.size() < 1) {
+			return false;
+		}
+		AABB temp;
+		if (list[0] != nullptr && list[0]->boundingBox(t0, t1, temp)) {
+			box = temp;
+		} else {
+			return false;
+		}
+		for (int i = 1; i < list.size(); i++) {
+			if (list[i] != nullptr && list[i]->boundingBox(t0, t1, temp)) {
+				box = surroundBox(box, temp);
+			} else {
+				return false;
+			}
+		}
+		return true;
+	}
 };
+
+
 
 #endif /* Object_h */

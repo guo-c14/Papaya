@@ -49,6 +49,10 @@ public:
 		}
 		return false;
 	}
+	bool boundingBox(double t0, double t1, AABB &box) const {
+		box = AABB(center - radius, center + radius);
+		return true;
+	}
 };
 
 class MovingSphere: public Object {
@@ -94,6 +98,12 @@ public:
 			}
 		}
 		return false;
+	}
+	bool boundingBox(double t0, double t1, AABB &box) const {
+		AABB box0(center0 - radius, center0 + radius);
+		AABB box1(center1 - radius, center1 + radius);
+		box = surroundBox(box0, box1);
+		return true;
 	}
 };
 
