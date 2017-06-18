@@ -37,23 +37,30 @@ Pixel color(const Ray &r, Object *world, int depth) {
 }
 
 ObjectList *random_scene() {
-	vector<Object *> list(488);
+	vector<Object *> list(500);
 	list[0] =  new Sphere(Vector(0, -4000, 0), 4000, new Diffuse(Vector(0.5, 0.5, 0.5)));
 	int i = 1;
-	for (int a = -11; a < 11; a++) {
-		for (int b = -11; b < 11; b++) {
+	for (int a = -10; a < 10; a++) {
+		for (int b = -10; b < 10; b++) {
 			float choose_mat = drand48();
 			Vector center(4 * a + 3.6 * drand48(), 0.8, 4 * b + 3.6 * drand48());
 			if (distance(center, {16, 0.8, 0}) > 3.6) {
-				if (choose_mat < 0.8) {
+				if (choose_mat < 0.4) {
 					list[i++] = new Sphere(center, 0.8, new Diffuse(Vector(drand48() * drand48(), drand48() * drand48(), drand48() * drand48())));
 				}
-				else if (choose_mat < 0.95) {
-					list[i++] = new Sphere(center, 0.8,
-										   new Metal(Vector(0.5 * (1 + drand48()), 0.5 * (1 + drand48()), 0.5 * (1 + drand48())), 0.5 * drand48()));
+				else if (choose_mat < 0.8) {
+					list[i++] = new MovingSphere(center, center + Vector(0, 2.0 * drand48(), 0), 0.0, 1.0, 0.8, new Diffuse(Vector(drand48() * drand48(), drand48() * drand48(), drand48() * drand48())));
 				}
-				else {
+				else if (choose_mat < 0.88) {
+					list[i++] = new Sphere(center, 0.8, new Metal(Vector(0.5 * (1 + drand48()), 0.5 * (1 + drand48()), 0.5 * (1 + drand48())), 0.5 * drand48()));
+				}
+				else if (choose_mat < 0.96) {
+					list[i++] = new MovingSphere(center, center + Vector(0, 2.0 * drand48(), 0), 0.0, 1.0, 0.8, new Metal(Vector(0.5 * (1 + drand48()), 0.5 * (1 + drand48()), 0.5 * (1 + drand48())), 0.5 * drand48()));
+				}
+				else if (choose_mat < 0.98)  {
 					list[i++] = new Sphere(center, 0.8, new Dielectric(1.5));
+				} else {
+					list[i++] = new MovingSphere(center, center + Vector(0, 2.0 * drand48(), 0), 0.0, 1.0, 0.8, new Dielectric(1.5));
 				}
 			}
 		}
@@ -86,7 +93,9 @@ int main(int argc, const char * argv[]) {
 		20,
 		double(width) / double(height),
 		0.1,
-		40.0
+		40.0,
+		0.0,
+		1.0
 	};
 	Canvas canvas;
 	canvas.pixels = vector<vector<Pixel>>(height);

@@ -20,12 +20,17 @@ public:
 	Vector origin, direction;
 	Vector &a=origin, &A=origin;
 	Vector &b=direction, &B=direction;
+	double time;
 	Ray() {}
-	Ray(const Vector &a, const Vector &b): origin(a), direction(normalize(b)) {}
-	Ray(const Ray &ray): origin(ray.origin), direction(ray.direction) {}
+	Ray(const Vector &a, const Vector &b, double time=0.0):
+		origin(a),
+		direction(normalize(b)),
+		time(time) {}
+	Ray(const Ray &ray): origin(ray.origin), direction(ray.direction), time(ray.time) {}
 	Ray &operator=(const Ray &r) {
 		a = r.a;
 		b = r.b;
+		time = r.time;
 		return *this;
 	}
 	Vector pointAt(double t) const {

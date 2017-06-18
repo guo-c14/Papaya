@@ -51,4 +51,50 @@ public:
 	}
 };
 
+class MovingSphere: public Object {
+public:
+	Vector center0, center1;
+	double time0, time1;
+	double radius;
+	Material *material;
+	MovingSphere() {}
+	MovingSphere(Vector center0, Vector center1, double t0, double t1,
+				 double radius, Material *material):
+	center0(center0),
+	center1(center1),
+	time0(t0),
+	time1(t1),
+	radius(radius),
+	material(material) {}
+	Vector center(double time) const {
+		return center0 + (time - time0) / (time1 - time0) * (center1 - center0);
+	}
+	bool hit(const Ray &ray, double tMin, double tMax, HitRecord &record) const {
+		Vector oc = ray.origin - center(ray.time);
+		double a = dot(ray.direction, ray.direction);
+		double b = dot(oc, ray.direction);
+		double c = dot(oc, oc) - radius * radius;
+		double discriminant = b * b - a * c;
+		if (discriminant > 0) {
+			double temp = (-b - sqrt(discriminant)) / a;
+			if (tMin < temp && temp < tMax) {
+				record.t = temp;
+				record.p = ray.pointAt(record.t);
+				record.normal = (record.p - center(ray.time)) / radius;
+				record.material = material;
+				return true;
+			}
+			temp = (-b + sqrt(discriminant)) / a;
+			if (tMin < temp && temp < tMax) {
+				record.t = temp;
+				record.p = ray.pointAt(record.t);
+				record.normal = (record.p - center(ray.time)) / radius;
+				record.material = material;
+				return true;
+			}
+		}
+		return false;
+	}
+};
+
 #endif /* Sphere_h */

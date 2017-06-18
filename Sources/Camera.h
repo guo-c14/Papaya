@@ -23,7 +23,10 @@ public:
 	Vector vertical;
 	Vector u, v, w;
 	double lens_radius;
-	Camera(Vector lookfrom, Vector lookat, Vector vup, double vfov, double aspect, double aperture, double focus_dist) {
+	double time0, time1;
+	Camera(Vector lookfrom, Vector lookat, Vector vup, double vfov,
+		   double aspect, double aperture, double focus_dist,
+		   double time0, double time1): time0(time0), time1(time1) {
 		lens_radius = aperture / 2;
 		double theta = vfov * PI / 180;
 		double half_height = tan(theta / 2);
@@ -39,7 +42,8 @@ public:
 	Ray getRay(double s, double t) {
 		Vector rd = lens_radius * random_in_unit_disk();
 		Vector offset = u * rd.x + v * rd.y;
-		return Ray(origin + offset, low_left_corner + s * horizontal + t * vertical - origin - offset);
+		double time = time0 + drand48() * (time1 - time0);
+		return Ray(origin + offset, low_left_corner + s * horizontal + t * vertical - origin - offset, time);
 	}
 };
 

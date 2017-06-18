@@ -23,3 +23,7 @@ C++ Path Tracer (路径追踪器)
 ### 随机场景
 
 ![](Outputs/Random.ppm)
+
+### 动态模糊
+
+![](Outputs/Motion.ppm)
