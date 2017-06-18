@@ -9,6 +9,7 @@
 #include <iostream>
 #include <vector>
 #include <cmath>
+#include <thread>
 #include "Vector.h"
 #include "Object.h"
 #include "Sphere.h"
@@ -19,7 +20,7 @@
 
 using std::vector;
 
-Pixel color(const Ray &r, Object *world, int depth) {
+Pixel color(const Ray &r, const Object *world, int depth) {
 	HitRecord rec;
 	if (world->hit(r, 0.001, 0x1.fffffep+127f, rec)) {
 		Vector attenutation;
@@ -71,21 +72,31 @@ ObjectList *random_scene() {
 	return new ObjectList(list);
 }
 
+void call_from_thread(vector<vector<Pixel>> &pixels, int startRow, int endRow, int width, int height, const Camera &camera, const Object *world) {
+	for (int i = startRow; i < endRow; i++) {
+		pixels[i - startRow] = vector<Pixel>(width);
+		for (int j = 0; j < width; j++) {
+			Pixel col;
+			for (int k = 0; k < 100; k++) {
+				double u = static_cast<double>(j + drand48()) / width;
+				double v = 1.0 - static_cast<double>(i + drand48()) / height;
+				Ray r(camera.getRay(u, v));
+				col += color(r, world, 0);
+			}
+			col /= 100;
+			pixels[i - startRow][j] = {sqrt(col.x), sqrt(col.y), sqrt(col.z)};
+		}
+	}
+}
+
 int main(int argc, const char * argv[]) {
 	Vector low_left_corner(-2.0, -1.0, -1.0);
 	Vector horizontal(4.0, 0.0, 0.0);
 	Vector vertical(0.0, 2.0, 0.0);
 	Vector origin(0.0, 0.0, 0.0);
-//	vector<Object *> list{
-//		new Sphere({0.0, 0.0, -4.0}, 2.0, new Metal({0.8, 0.6, 0.8}, 0.3)),
-//		new Sphere({4.0, 0.0, -4.0}, 2.0, new Diffuse({0.3, 0.8, 0.3})),
-//		new Sphere({-4.0, 0.0, -4.0}, 2.0, new Dielectric(1.5)),
-//		new Sphere({0.0, -402, -4.0}, 400.0, new Metal({0.8, 0.6, 0.2}, 0.04))
-//	};
 	Object *world = random_scene();
 	int width = 800;
 	int height = 400;
-	int ns = 100;
 	Camera camera{
 		{52.0, 8.0, 12.0},
 		{0.0, 0.0, 0.0},
@@ -98,21 +109,47 @@ int main(int argc, const char * argv[]) {
 		1.0
 	};
 	Canvas canvas;
-	canvas.pixels = vector<vector<Pixel>>(height);
-	for (int i = 0; i < height; i++) {
-		canvas.pixels[i] = vector<Pixel>(width);
-		for (int j = 0; j < width; j++) {
-			Pixel col;
-			for (int k = 0; k < ns; k++) {
-				double u = static_cast<double>(j + drand48()) / width;
-				double v = 1.0 - static_cast<double>(i + drand48()) / height;
-				Ray r(camera.getRay(u, v));
-				col += color(r, world, 0);
-			}
-			col /= ns;
-			canvas.pixels[i][j] = {sqrt(col.x), sqrt(col.y), sqrt(col.z)};
-		}
+	canvas.pixels = vector<vector<Pixel>>();
+	vector<vector<Pixel>> first_part(height*5/16);
+	vector<vector<Pixel>> second_part(height*9/16-height*5/16);
+	vector<vector<Pixel>> third_part(height*13/16-height*9/16);
+	vector<vector<Pixel>> forth_part(height-height*13/16);
+	std::thread t0(call_from_thread, std::ref(first_part), 0, height*5/16, width, height, std::ref(camera), world);
+	std::thread t1(call_from_thread, std::ref(second_part), height*5/16, height*9/16, width, height, std::ref(camera), world);
+	std::thread t2(call_from_thread, std::ref(third_part), height*9/16, height*13/16, width, height, std::ref(camera), world);
+	std::thread t3(call_from_thread, std::ref(forth_part), height*13/16, height, width, height, std::ref(camera), world);
+	t0.join();
+	t1.join();
+	t2.join();
+	t3.join();
+	for (int i = 0; i < height*5/16; i++) {
+		canvas.pixels.push_back(first_part[i]);
 	}
+	for (int i = 0; i < height*9/16 - height*5/16; i++) {
+		canvas.pixels.push_back(second_part[i]);
+	}
+	for (int i = 0; i < height*13/16 - height*9/16; i++) {
+		canvas.pixels.push_back(third_part[i]);
+	}
+	for (int i = 0; i < height - height*13/16; i++) {
+		canvas.pixels.push_back(forth_part[i]);
+	}
+//	int ns = 100;
+//	canvas.pixels = vector<vector<Pixel>>(height);
+//	for (int i = 0; i < height; i++) {
+//		canvas.pixels[i] = vector<Pixel>(width);
+//		for (int j = 0; j < width; j++) {
+//			Pixel col;
+//			for (int k = 0; k < ns; k++) {
+//				double u = static_cast<double>(j + drand48()) / width;
+//				double v = 1.0 - static_cast<double>(i + drand48()) / height;
+//				Ray r(camera.getRay(u, v));
+//				col += color(r, world, 0);
+//			}
+//			col /= ns;
+//			canvas.pixels[i][j] = {sqrt(col.x), sqrt(col.y), sqrt(col.z)};
+//		}
+//	}
 	canvas.setImageFormat(ppm);
 	canvas.exportTo("../../../Outputs/1.ppm");
 	return 0;

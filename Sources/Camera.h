@@ -39,7 +39,7 @@ public:
 		horizontal = 2 * half_width * focus_dist * u;
 		vertical = 2 * half_height * focus_dist * v;
 	}
-	Ray getRay(double s, double t) {
+	Ray getRay(double s, double t) const {
 		Vector rd = lens_radius * random_in_unit_disk();
 		Vector offset = u * rd.x + v * rd.y;
 		double time = time0 + drand48() * (time1 - time0);
