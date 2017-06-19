@@ -2,7 +2,7 @@ cxx = g++
 cxxflags = -Wall -std=c++11 -O3
 linkflags =
 prom = Papaya
-deps = $(shell find ./ -name "*.h")
+deps = $(shell find ./ -name "*.hpp")
 src = $(shell find ./ -name "*.cpp")
 obj = $(src:%.cpp=%.o)
 
