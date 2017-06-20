@@ -59,3 +59,5 @@ C++ Path Tracer (路径追踪器)
 ![](Outputs/CornellBox.ppm)
 
 ![](Outputs/CornellBox1.ppm)
+
+![](Outputs/CornellBox2.ppm)

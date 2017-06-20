@@ -39,11 +39,11 @@ bool Metal::scatter(const Ray &incident, const HitRecord &record,
 	return dot(scattered.direction, record.normal) > 0;
 }
 
-Dielectric::Dielectric(double ref_idx): ref_idx(ref_idx) {}
+Dielectric::Dielectric(double ref_idx, const Vec3D &color): ref_idx(ref_idx), color(color) {}
 
 bool Dielectric::scatter(const Ray &incident, const HitRecord &record,
 	Vec3D &attenuation, Ray &scattered) const  {
-	attenuation = 1;
+	attenuation = color;
 	Vec3D reflected = reflect(incident.direction, record.normal);
 	Vec3D refracted;
 	Vec3D outward_normal;

@@ -44,8 +44,9 @@ public:
 class Dielectric: public Material {
 protected:
 	double ref_idx;
+	Vec3D color;
 public:
-	Dielectric(double ref_idx);
+	Dielectric(double ref_idx, const Vec3D &color = 1);
 	virtual bool scatter(const Ray &incident, const HitRecord &record,
 		Vec3D &attenuation, Ray &scattered) const;
 };

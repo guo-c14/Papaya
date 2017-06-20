@@ -34,7 +34,7 @@ Object **cornell_box(int &i) {
 	list[i++] = new FlipNormal(new RectangleXZ(0, 555, 0, 555, 555, white));
 	list[i++] = new RectangleXZ(0, 555, 0, 555, 0, white);
 	list[i++] = new FlipNormal(new RectangleXY(0, 555, 0, 555, 555, white));
-	list[i++] = new Translate(new Sphere(80, 80, new Dielectric(1.55)), {300, 0, 65});
+	list[i++] = new Translate(new Sphere(80, 80, new Dielectric(1.55, {0.4, 1, 0.4})), {300, 0, 65});
 	list[i++] = new Translate(new RotateY(new Cube(0, {165, 330, 165}, white), -15), {125, 0, 295});
 	return list;
 }
