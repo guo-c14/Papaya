@@ -11,7 +11,7 @@
 #include "BVH.hpp"
 
 inline int compareX(const void *a, const void *b) {
-	Box left_box, right_box;
+	BBox left_box, right_box;
 	Object *ao = *(Object **)a;
 	Object *bo = *(Object **)b;
 	if (!ao->boundingBox(0, 0, left_box) || !bo->boundingBox(0, 0, right_box)) {
@@ -25,7 +25,7 @@ inline int compareX(const void *a, const void *b) {
 }
 
 inline int compareY(const void *a, const void *b) {
-	Box left_box, right_box;
+	BBox left_box, right_box;
 	Object *ao = *(Object **)a;
 	Object *bo = *(Object **)b;
 	if (!ao->boundingBox(0, 0, left_box) || !bo->boundingBox(0, 0, right_box)) {
@@ -39,7 +39,7 @@ inline int compareY(const void *a, const void *b) {
 }
 
 inline int compareZ(const void *a, const void *b) {
-	Box left_box, right_box;
+	BBox left_box, right_box;
 	Object *ao = *(Object **)a;
 	Object *bo = *(Object **)b;
 	if (!ao->boundingBox(0, 0, left_box) || !bo->boundingBox(0, 0, right_box)) {
@@ -70,7 +70,7 @@ BVH::BVH(Object **list, int n, double time0, double time1) {
 		left = new BVH(list, n / 2, time0, time1);
 		right = new BVH(list + n / 2, n - n / 2, time0, time1);
 	}
-	Box left_box, right_box;
+	BBox left_box, right_box;
 	if (!left->boundingBox(time0, time1, left_box) ||
 		!right->boundingBox(time0, time1, right_box)) {
 		std::cerr << "No Bouding Box at all." << std::endl;
@@ -97,7 +97,7 @@ bool BVH::hit(const Ray &ray, double tmin, double tmax, HitRecord &record) const
 	return false;
 }
 
-bool BVH::boundingBox(double t0, double t1, Box &box) const {
+bool BVH::boundingBox(double t0, double t1, BBox &box) const {
 	box = this->box;
 	return true;
 }

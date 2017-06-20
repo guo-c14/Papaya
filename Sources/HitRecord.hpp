@@ -15,6 +15,7 @@ class Material;
 
 struct HitRecord {
 	double t;
+	double u, v;
 	Vec3D p;
 	Vec3D normal;
 	Material *material;

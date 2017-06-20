@@ -12,15 +12,15 @@
 #include "Ray.hpp"
 #include "Utility.hpp"
 
-class Box {
+class BBox {
 public:
 	Vec3D min, max;
-	Box();
-	Box(const Vec3D &min, const Vec3D &max);
+	BBox();
+	BBox(const Vec3D &min, const Vec3D &max);
 	bool hit(const Ray &ray, double tmin, double tmax) const;
 };
 
-inline Box surroundBox(Box box0, Box box1) {
+inline BBox surroundBox(BBox box0, BBox box1) {
 	Vec3D min {
 		ddmin(box0.min.x, box1.min.x),
 		ddmin(box0.min.y, box1.min.y),

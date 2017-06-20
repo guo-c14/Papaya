@@ -9,11 +9,14 @@
 #ifndef Utility_hpp
 #define Utility_hpp
 
+#include <limits>
 #include "Vec3D.hpp"
 
 const double PI = 3.141592653589793;
 const double PI_180 = 0.017453292519943295;
 const double PI_360 = 0.008726646259971648;
+const double MAX_DOUBLE = std::numeric_limits<double>::max();
+const double MIN_DOUBLE = std::numeric_limits<double>::min();
 
 double drand();
 

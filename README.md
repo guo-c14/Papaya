@@ -46,10 +46,16 @@ C++ Path Tracer (路径追踪器)
 
 ![](Outputs/Random.ppm)
 
-### 动态模糊
+### 运动模糊
 
 ![](Outputs/Motion.ppm)
 
 ### 固态纹理
 
 ![](Outputs/Texture.ppm)
+
+### Cornell Box
+
+![](Outputs/CornellBox.ppm)
+
+![](Outputs/CornellBox1.ppm)

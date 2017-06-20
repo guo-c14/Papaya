@@ -24,6 +24,10 @@ bool Sphere::hit(const Ray &ray, double tmin, double tmax, HitRecord &record) co
 			record.p = ray.pointAt(record.t);
 			record.normal = (record.p - center) / radius;
 			record.material = material;
+			double phi = atan2(record.normal.z, record.normal.x);
+			double theta = asin(record.normal.y);
+			record.u = 1 - (phi + PI) / (2 * PI);
+			record.v = (theta + PI / 2) / PI;
 			return true;
 		}
 		temp = (-b + sqrt(discriminant)) / a;
@@ -32,14 +36,18 @@ bool Sphere::hit(const Ray &ray, double tmin, double tmax, HitRecord &record) co
 			record.p = ray.pointAt(record.t);
 			record.normal = (record.p - center) / radius;
 			record.material = material;
+			double phi = atan2(record.normal.z, record.normal.x);
+			double theta = asin(record.normal.y);
+			record.u = 1 - (phi + PI) / (2 * PI);
+			record.v = (theta + PI / 2) / PI;
 			return true;
 		}
 	}
 	return false;
 }
 
-bool Sphere::boundingBox(double t0, double t1, Box &box) const {
-	box = Box(center - radius, center + radius);
+bool Sphere::boundingBox(double t0, double t1, BBox &box) const {
+	box = BBox(center - radius, center + radius);
 	return true;
 }
 
@@ -74,9 +82,9 @@ bool MovingSphere::hit(const Ray &ray, double tmin, double tmax, HitRecord &reco
 	return false;
 }
 
-bool MovingSphere::boundingBox(double t0, double t1, Box &box) const {
-	Box box0(center0 - radius, center0 + radius);
-	Box box1(center1 - radius, center1 + radius);
+bool MovingSphere::boundingBox(double t0, double t1, BBox &box) const {
+	BBox box0(center0 - radius, center0 + radius);
+	BBox box1(center1 - radius, center1 + radius);
 	box = surroundBox(box0, box1);
 	return true;
 }

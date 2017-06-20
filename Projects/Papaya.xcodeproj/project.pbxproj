@@ -13,7 +13,7 @@
 		A20C873F1EF754E000732DB6 /* ImageIO.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A20C873D1EF754E000732DB6 /* ImageIO.cpp */; };
 		A20C87421EF7572C00732DB6 /* Canvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A20C87401EF7572C00732DB6 /* Canvas.cpp */; };
 		A20C87451EF75B0000732DB6 /* Texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A20C87431EF75B0000732DB6 /* Texture.cpp */; };
-		A20C87481EF763EC00732DB6 /* Box.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A20C87461EF763EC00732DB6 /* Box.cpp */; };
+		A20C87481EF763EC00732DB6 /* BBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A20C87461EF763EC00732DB6 /* BBox.cpp */; };
 		A20C874B1EF765D700732DB6 /* Ray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A20C87491EF765D700732DB6 /* Ray.cpp */; };
 		A20C874E1EF7690800732DB6 /* BVH.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A20C874C1EF7690800732DB6 /* BVH.cpp */; };
 		A20C87511EF769F700732DB6 /* Object.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A20C874F1EF769F700732DB6 /* Object.cpp */; };
@@ -21,6 +21,9 @@
 		A20C875A1EF7773F00732DB6 /* Sphere.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A20C87581EF7773F00732DB6 /* Sphere.cpp */; };
 		A20C875D1EF7777800732DB6 /* Material.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A20C875B1EF7777800732DB6 /* Material.cpp */; };
 		A20C87601EF77A4300732DB6 /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A20C875E1EF77A4300732DB6 /* Camera.cpp */; };
+		A20C87661EF96B5700732DB6 /* Light.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A20C87641EF96B5700732DB6 /* Light.cpp */; };
+		A20C87691EF96FB900732DB6 /* Rectangle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A20C87671EF96FB900732DB6 /* Rectangle.cpp */; };
+		A20C876C1EF9955F00732DB6 /* Cube.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A20C876A1EF9955F00732DB6 /* Cube.cpp */; };
 		A2FD95251EF48EE7000F01FF /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2FD95241EF48EE7000F01FF /* main.cpp */; };
 /* End PBXBuildFile section */
 
@@ -49,8 +52,8 @@
 		A20C87411EF7572C00732DB6 /* Canvas.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Canvas.hpp; sourceTree = "<group>"; };
 		A20C87431EF75B0000732DB6 /* Texture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Texture.cpp; sourceTree = "<group>"; };
 		A20C87441EF75B0000732DB6 /* Texture.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Texture.hpp; sourceTree = "<group>"; };
-		A20C87461EF763EC00732DB6 /* Box.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Box.cpp; sourceTree = "<group>"; };
-		A20C87471EF763EC00732DB6 /* Box.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Box.hpp; sourceTree = "<group>"; };
+		A20C87461EF763EC00732DB6 /* BBox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BBox.cpp; sourceTree = "<group>"; };
+		A20C87471EF763EC00732DB6 /* BBox.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BBox.hpp; sourceTree = "<group>"; };
 		A20C87491EF765D700732DB6 /* Ray.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Ray.cpp; sourceTree = "<group>"; };
 		A20C874A1EF765D700732DB6 /* Ray.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Ray.hpp; sourceTree = "<group>"; };
 		A20C874C1EF7690800732DB6 /* BVH.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BVH.cpp; sourceTree = "<group>"; };
@@ -65,6 +68,12 @@
 		A20C875C1EF7777800732DB6 /* Material.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Material.hpp; sourceTree = "<group>"; };
 		A20C875E1EF77A4300732DB6 /* Camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Camera.cpp; sourceTree = "<group>"; };
 		A20C875F1EF77A4300732DB6 /* Camera.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Camera.hpp; sourceTree = "<group>"; };
+		A20C87641EF96B5700732DB6 /* Light.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Light.cpp; sourceTree = "<group>"; };
+		A20C87651EF96B5700732DB6 /* Light.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Light.hpp; sourceTree = "<group>"; };
+		A20C87671EF96FB900732DB6 /* Rectangle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Rectangle.cpp; sourceTree = "<group>"; };
+		A20C87681EF96FB900732DB6 /* Rectangle.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Rectangle.hpp; sourceTree = "<group>"; };
+		A20C876A1EF9955F00732DB6 /* Cube.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Cube.cpp; sourceTree = "<group>"; };
+		A20C876B1EF9955F00732DB6 /* Cube.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Cube.hpp; sourceTree = "<group>"; };
 		A2FD951A1EF48E99000F01FF /* Papaya */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Papaya; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2FD95241EF48EE7000F01FF /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -101,6 +110,10 @@
 			isa = PBXGroup;
 			children = (
 				A2FD95241EF48EE7000F01FF /* main.cpp */,
+				A20C876B1EF9955F00732DB6 /* Cube.hpp */,
+				A20C876A1EF9955F00732DB6 /* Cube.cpp */,
+				A20C87651EF96B5700732DB6 /* Light.hpp */,
+				A20C87641EF96B5700732DB6 /* Light.cpp */,
 				A20C87381EF7465E00732DB6 /* Vec3D.hpp */,
 				A20C87371EF7465E00732DB6 /* Vec3D.cpp */,
 				A20C87351EF73CE800732DB6 /* Utility.hpp */,
@@ -117,12 +130,14 @@
 				A20C875E1EF77A4300732DB6 /* Camera.cpp */,
 				A20C874D1EF7690800732DB6 /* BVH.hpp */,
 				A20C874C1EF7690800732DB6 /* BVH.cpp */,
-				A20C87471EF763EC00732DB6 /* Box.hpp */,
-				A20C87461EF763EC00732DB6 /* Box.cpp */,
-				A20C87591EF7773F00732DB6 /* Sphere.hpp */,
-				A20C87581EF7773F00732DB6 /* Sphere.cpp */,
+				A20C87471EF763EC00732DB6 /* BBox.hpp */,
+				A20C87461EF763EC00732DB6 /* BBox.cpp */,
 				A20C87501EF769F700732DB6 /* Object.hpp */,
 				A20C874F1EF769F700732DB6 /* Object.cpp */,
+				A20C87591EF7773F00732DB6 /* Sphere.hpp */,
+				A20C87581EF7773F00732DB6 /* Sphere.cpp */,
+				A20C87681EF96FB900732DB6 /* Rectangle.hpp */,
+				A20C87671EF96FB900732DB6 /* Rectangle.cpp */,
 				A20C87531EF76A4000732DB6 /* HitRecord.hpp */,
 				A20C87521EF76A4000732DB6 /* HitRecord.cpp */,
 				A20C875C1EF7777800732DB6 /* Material.hpp */,
@@ -191,18 +206,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A20C876C1EF9955F00732DB6 /* Cube.cpp in Sources */,
 				A20C874B1EF765D700732DB6 /* Ray.cpp in Sources */,
 				A20C87361EF73CE800732DB6 /* Utility.cpp in Sources */,
+				A20C87661EF96B5700732DB6 /* Light.cpp in Sources */,
 				A20C87511EF769F700732DB6 /* Object.cpp in Sources */,
 				A20C87601EF77A4300732DB6 /* Camera.cpp in Sources */,
 				A20C875A1EF7773F00732DB6 /* Sphere.cpp in Sources */,
 				A20C874E1EF7690800732DB6 /* BVH.cpp in Sources */,
-				A20C87481EF763EC00732DB6 /* Box.cpp in Sources */,
+				A20C87481EF763EC00732DB6 /* BBox.cpp in Sources */,
 				A20C87451EF75B0000732DB6 /* Texture.cpp in Sources */,
 				A20C875D1EF7777800732DB6 /* Material.cpp in Sources */,
 				A20C873C1EF74EA100732DB6 /* Color.cpp in Sources */,
 				A2FD95251EF48EE7000F01FF /* main.cpp in Sources */,
 				A20C873F1EF754E000732DB6 /* ImageIO.cpp in Sources */,
+				A20C87691EF96FB900732DB6 /* Rectangle.cpp in Sources */,
 				A20C87391EF7465E00732DB6 /* Vec3D.cpp in Sources */,
 				A20C87541EF76A4000732DB6 /* HitRecord.cpp in Sources */,
 				A20C87421EF7572C00732DB6 /* Canvas.cpp in Sources */,

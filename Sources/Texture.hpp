@@ -9,7 +9,7 @@
 #ifndef Texture_hpp
 #define Texture_hpp
 
-#include "Vec3D.hpp"
+#include "ImageIO.hpp"
 
 class Texture {
 public:
@@ -31,6 +31,15 @@ protected:
 	double scale;
 public:
 	CheckerTexture(Texture *odd, Texture *even, double scale = 2.0);
+	virtual Vec3D value(double u, double v, const Vec3D &p) const;
+};
+
+class ImageTexture: public Texture {
+protected:
+	int width, height;
+	vector<vector<Vec3D>> pixels;
+public:
+	ImageTexture(const string &fileName, ImageFormat format, int width, int height);
 	virtual Vec3D value(double u, double v, const Vec3D &p) const;
 };
 

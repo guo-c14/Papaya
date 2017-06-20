@@ -17,6 +17,7 @@ class Material  {
 public:
 	virtual bool scatter(const Ray &incident, const HitRecord &record,
 		Vec3D &attenuation, Ray &scattered) const = 0;
+	virtual Vec3D emitRay() const;
 };
 
 class Diffuse: public Material {
@@ -31,10 +32,11 @@ public:
 
 class Metal: public Material {
 protected:
-	Vec3D albedo;
+	Texture *texture;
 	double fuzz;
 public:
 	Metal(const Vec3D &albedo, double fuzz);
+	Metal(Texture *texture, double fuzz);
 	virtual bool scatter(const Ray &incident, const HitRecord &record,
 		Vec3D &attenuation, Ray &scattered) const;
 };

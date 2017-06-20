@@ -9,9 +9,11 @@
 #include "Utility.hpp"
 #include "Material.hpp"
 
-Diffuse::Diffuse(const Vec3D &v) {
-	texture = new ConstantTexture(v);
+Vec3D Material::emitRay() const {
+	return 0;
 }
+
+Diffuse::Diffuse(const Vec3D &v): texture(new ConstantTexture(v)) {}
 
 Diffuse::Diffuse(Texture *texture): texture(texture) {}
 
@@ -19,18 +21,21 @@ bool Diffuse::scatter(const Ray &incident, const HitRecord &record,
 	Vec3D &attenuation, Ray &scattered) const {
 	Vec3D target = record.p + record.normal + random_in_unit_sphere();
 	scattered = Ray(record.p, target - record.p, incident.time);
-	attenuation = texture->value(0, 0, record.p);
+	attenuation = texture->value(record.u, record.v, record.p);
 	return true;
 }
 
-Metal::Metal(const Vec3D &albedo, double fuzz): albedo(albedo),
+Metal::Metal(const Vec3D &v, double fuzz): texture(new ConstantTexture(v)),
+	fuzz(fuzz < 1.0 ? fuzz : 1.0) {}
+
+Metal::Metal(Texture *texture, double fuzz): texture(texture),
 	fuzz(fuzz < 1.0 ? fuzz : 1.0) {}
 
 bool Metal::scatter(const Ray &incident, const HitRecord &record,
 	Vec3D &attenuation, Ray &scattered) const {
 	Vec3D reflected = reflect(incident.direction, record.normal);
 	scattered = Ray(record.p, reflected + fuzz * random_in_unit_sphere(), incident.time);
-	attenuation = albedo;
+	attenuation = texture->value(record.u, record.v, record.p);
 	return dot(scattered.direction, record.normal) > 0;
 }
 

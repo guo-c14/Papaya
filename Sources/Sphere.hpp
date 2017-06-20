@@ -20,7 +20,7 @@ protected:
 public:
 	Sphere(const Vec3D &center, double radius, Material *material);
 	virtual bool hit(const Ray &ray, double tmin, double tmax, HitRecord &record) const;
-	virtual bool boundingBox(double t0, double t1, Box &box) const;
+	virtual bool boundingBox(double t0, double t1, BBox &box) const;
 };
 
 class MovingSphere: public Object {
@@ -34,7 +34,7 @@ public:
 		double radius, Material *material);
 	Vec3D center(double time) const;
 	virtual bool hit(const Ray &ray, double tmin, double tmax, HitRecord &record) const;
-	virtual bool boundingBox(double t0, double t1, Box &box) const;
+	virtual bool boundingBox(double t0, double t1, BBox &box) const;
 };
 
 inline Vec3D MovingSphere::center(double time) const {

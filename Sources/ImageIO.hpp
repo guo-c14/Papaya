@@ -22,31 +22,31 @@ enum ImageFormat {
 
 class ImageIO {
 public:
-	virtual void importImage(vector<vector<Color>> &pixels, const string &fileName) = 0;
+	virtual void importImage(vector<vector<Vec3D>> &pixels, const string &fileName) = 0;
 	virtual void exportImage(const vector<vector<Color>> &pixels, const string &fileName) = 0;
 };
 
 class BMPIO: public ImageIO {
 public:
-	virtual void importImage(vector<vector<Color>> &pixels, const string &fileName);
+	virtual void importImage(vector<vector<Vec3D>> &pixels, const string &fileName);
 	virtual void exportImage(const vector<vector<Color>> &pixels, const string &fileName);
 };
 
 class JPGIO: public ImageIO {
 public:
-	virtual void importImage(vector<vector<Color>> &pixels, const string &fileName);
+	virtual void importImage(vector<vector<Vec3D>> &pixels, const string &fileName);
 	virtual void exportImage(const vector<vector<Color>> &pixels, const string &fileName);
 };
 
 class PNGIO: public ImageIO {
 public:
-	virtual void importImage(vector<vector<Color>> &pixels, const string &fileName);
+	virtual void importImage(vector<vector<Vec3D>> &pixels, const string &fileName);
 	virtual void exportImage(const vector<vector<Color>> &pixels, const string &fileName);
 };
 
 class PPMIO: public ImageIO {
 public:
-	virtual void importImage(vector<vector<Color>> &pixels, const string &fileName);
+	virtual void importImage(vector<vector<Vec3D>> &pixels, const string &fileName);
 	virtual void exportImage(const vector<vector<Color>> &pixels, const string &fileName);
 };
 

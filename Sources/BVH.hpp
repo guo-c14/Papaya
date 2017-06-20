@@ -9,17 +9,17 @@
 #ifndef BVH_hpp
 #define BVH_hpp
 
-#include "Box.hpp"
+#include "BBox.hpp"
 #include "Object.hpp"
 
 class BVH: public Object {
 protected:
-	Box box;
+	BBox box;
 	Object *left, *right;
 public:
 	BVH(Object **list, int n, double time0, double time1);
 	virtual bool hit(const Ray &ray, double tmin, double tmax, HitRecord &record) const;
-	virtual bool boundingBox(double t0, double t1, Box &box) const;
+	virtual bool boundingBox(double t0, double t1, BBox &box) const;
 };
 
 #endif /* BVH_hpp */

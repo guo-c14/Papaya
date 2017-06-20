@@ -6,13 +6,13 @@
 //  Copyright © 2017 Guo Chen. All rights reserved.
 //
 
-#include "Box.hpp"
+#include "BBox.hpp"
 
-Box::Box() {}
+BBox::BBox() {}
 
-Box::Box(const Vec3D &min, const Vec3D &max): min(min), max(max) {}
+BBox::BBox(const Vec3D &min, const Vec3D &max): min(min), max(max) {}
 
-bool Box::hit(const Ray &ray, double tmin, double tmax) const {
+bool BBox::hit(const Ray &ray, double tmin, double tmax) const {
 	for (int i = 0; i < 3; i++) {
 		double invD = 1.0 / ray.direction[i];
 		double t0, t1;

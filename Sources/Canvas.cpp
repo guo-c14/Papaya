@@ -14,18 +14,18 @@ using std::thread;
 
 Vec3D Canvas::computeColor(const Ray &ray, const Object *scene, int depth) {
 	HitRecord record;
-	if (scene->hit(ray, 0.001, 0x1.fffffep+127f, record)) {
-		Vec3D attenutation;
+	if (scene->hit(ray, 0.001, MAX_DOUBLE, record)) {
 		Ray scattered;
+		Vec3D attenutation;
+		Vec3D emitted = record.material->emitRay();
 		if (depth < iteration_depth && record.material->scatter(ray, record, attenutation, scattered)) {
-			return attenutation * computeColor(scattered, scene, depth + 1);
+			return emitted + attenutation * computeColor(scattered, scene, depth + 1);
 		} else {
-			return 0;
+			return emitted;
 		}
 	}
 	else {
-		double t = 0.5 * ray.direction.y + 0.5;
-		return (1.0 - t) * Vec3D(1.0, 1.0, 1.0) + t * Vec3D(0.5, 0.7, 1.0);
+		return 0;
 	}
 }
 
@@ -64,13 +64,13 @@ void Canvas::callFromThread(int start_row, int end_row) {
 		for (int j = 0; j < width; j++) {
 			Vec3D col;
 			for (int k = 0; k < samples_per_pixel; k++) {
-				double u = static_cast<double>(j + drand()) / width;
+				double u = 1.0 - static_cast<double>(j + drand()) / width;
 				double v = 1.0 - static_cast<double>(i + drand()) / height;
 				Ray ray(camera.emitRay(u, v));
 				col += computeColor(ray, scene, 0);
 			}
 			col /= samples_per_pixel;
-			pixels[i][j] = Vec3D{sqrt(col.x), sqrt(col.y), sqrt(col.z)};
+			pixels[i][j] = col;
 		}
 	}
 }
