@@ -13,25 +13,27 @@
 #include "Object.hpp"
 
 class Sphere: public Object {
-public:
+protected:
 	Vec3D center;
 	double radius;
 	Material *material;
-	Sphere(Vec3D center, double radius, Material *material);
+public:
+	Sphere(const Vec3D &center, double radius, Material *material);
 	virtual bool hit(const Ray &ray, double tmin, double tmax, HitRecord &record) const;
 	virtual bool boundingBox(double t0, double t1, Box &box) const;
 };
 
 class MovingSphere: public Object {
-public:
+protected:
 	Vec3D center0, center1;
 	double time0, time1;
 	double radius;
 	Material *material;
-	MovingSphere(Vec3D center0, Vec3D center1, double t0, double t1,
-				 double radius, Material *material);
+public:
+	MovingSphere(const Vec3D &center0, const Vec3D &center1, double t0, double t1,
+		double radius, Material *material);
 	Vec3D center(double time) const;
-	virtual bool hit(const Ray &ray, double tMin, double tMax, HitRecord &record) const;
+	virtual bool hit(const Ray &ray, double tmin, double tmax, HitRecord &record) const;
 	virtual bool boundingBox(double t0, double t1, Box &box) const;
 };
 

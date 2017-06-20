@@ -11,6 +11,9 @@
 #include "Utility.hpp"
 
 double drand() {
-	static auto engine = std::bind(std::uniform_real_distribution<double>{0.0, 0.999999999999999999}, std::default_random_engine(static_cast<unsigned int>(time(0))));
+	static auto engine = std::bind(
+		std::uniform_real_distribution<double>{0, 0.9999999999999999},
+		std::default_random_engine(static_cast<unsigned int>(time(0)))
+	);
 	return engine();
 }

@@ -2,6 +2,28 @@
 
 C++ Path Tracer (路径追踪器) 
 
+## 概要
+
+### 渲染算法
+
+- Monte Carlo Path Tracing
+
+### 渲染效果
+
+- Anti-aliasing
+- Material
+	- Diffuse
+	- Metal
+	- Dielectrics
+- Texture
+- Defocus Blur
+- Motion Blur
+
+### 渲染加速
+
+- Multithreading
+- BVH (AABB)
+
 ## 效果
 
 ### 漫反射
@@ -16,7 +38,7 @@ C++ Path Tracer (路径追踪器)
 
 ![](Outputs/Camera.ppm)
 
-### 焦散
+### 焦散（景深）
 
 ![](Outputs/Defocus.ppm)
 

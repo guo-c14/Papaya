@@ -16,7 +16,7 @@ bool Box::hit(const Ray &ray, double tmin, double tmax) const {
 	for (int i = 0; i < 3; i++) {
 		double invD = 1.0 / ray.direction[i];
 		double t0, t1;
-		if (invD < 0.0) {
+		if (invD < 0) {
 			t0 = (max[i] - ray.origin[i]) * invD;
 			t1 = (min[i] - ray.origin[i]) * invD;
 		} else {

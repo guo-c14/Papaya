@@ -17,9 +17,9 @@ public:
 	Vec3D direction;
 	double time;
 	Ray();
-	Ray(const Vec3D &origin, const Vec3D &direction, double time = 0.0);
+	Ray(const Vec3D &origin, const Vec3D &direction, double time = 0);
 	Ray(const Ray &ray);
-	Ray &operator=(const Ray &r);
+	Ray &operator=(const Ray &ray);
 	Vec3D pointAt(double t) const;
 };
 

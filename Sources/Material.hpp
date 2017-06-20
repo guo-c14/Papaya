@@ -9,35 +9,43 @@
 #ifndef Material_hpp
 #define Material_hpp
 
-#include "Object.hpp"
+#include "HitRecord.hpp"
 #include "Ray.hpp"
 #include "Texture.hpp"
 
 class Material  {
 public:
-	virtual bool scatter(const Ray &r_in, const HitRecord &rec, Vec3D &attenuation, Ray &scattered) const = 0;
+	virtual bool scatter(const Ray &incident, const HitRecord &record,
+		Vec3D &attenuation, Ray &scattered) const = 0;
 };
 
 class Diffuse: public Material {
+protected:
+	Texture *texture;
 public:
-	Texture *albedo;
-	Diffuse(Texture *a) : albedo(a) {}
-	virtual bool scatter(const Ray &r_in, const HitRecord &rec, Vec3D &attenuation, Ray &scattered) const;
+	Diffuse(const Vec3D &v);
+	Diffuse(Texture *texture);
+	virtual bool scatter(const Ray &incident, const HitRecord &record,
+		Vec3D &attenuation, Ray &scattered) const;
 };
 
 class Metal: public Material {
-public:
+protected:
 	Vec3D albedo;
 	double fuzz;
-	Metal(const Vec3D &a, double f) : albedo(a), fuzz(f < 1.0 ? f : 1.0) {}
-	virtual bool scatter(const Ray &r_in, const HitRecord &rec, Vec3D &attenuation, Ray &scattered) const;
+public:
+	Metal(const Vec3D &albedo, double fuzz);
+	virtual bool scatter(const Ray &incident, const HitRecord &record,
+		Vec3D &attenuation, Ray &scattered) const;
 };
 
 class Dielectric: public Material {
-public:
+protected:
 	double ref_idx;
-	Dielectric(double ri) : ref_idx(ri) {}
-	virtual bool scatter(const Ray &r_in, const HitRecord &rec, Vec3D &attenuation, Ray &scattered) const;
+public:
+	Dielectric(double ref_idx);
+	virtual bool scatter(const Ray &incident, const HitRecord &record,
+		Vec3D &attenuation, Ray &scattered) const;
 };
 
 #endif /* Material_hpp */

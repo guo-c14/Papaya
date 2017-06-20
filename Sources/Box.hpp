@@ -10,6 +10,7 @@
 #define Box_hpp
 
 #include "Ray.hpp"
+#include "Utility.hpp"
 
 class Box {
 public:

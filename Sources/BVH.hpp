@@ -13,9 +13,10 @@
 #include "Object.hpp"
 
 class BVH: public Object {
-public:
+protected:
 	Box box;
 	Object *left, *right;
+public:
 	BVH(Object **list, int n, double time0, double time1);
 	virtual bool hit(const Ray &ray, double tmin, double tmax, HitRecord &record) const;
 	virtual bool boundingBox(double t0, double t1, Box &box) const;

@@ -8,14 +8,14 @@
 
 #include "Sphere.hpp"
 
-Sphere::Sphere(Vec3D center, double radius, Material *material):
+Sphere::Sphere(const Vec3D &center, double radius, Material *material):
 	center(center), radius(radius), material(material) {}
 
 bool Sphere::hit(const Ray &ray, double tmin, double tmax, HitRecord &record) const {
 	Vec3D oc = ray.origin - center;
-	double a = dot(ray.direction, ray.direction);
+	double a = ray.direction.norm2();
 	double b = dot(oc, ray.direction);
-	double c = dot(oc, oc) - radius * radius;
+	double c = oc.norm2() - radius * radius;
 	double discriminant = b * b - a * c;
 	if (discriminant > 0) {
 		double temp = (-b - sqrt(discriminant)) / a;
@@ -43,11 +43,11 @@ bool Sphere::boundingBox(double t0, double t1, Box &box) const {
 	return true;
 }
 
-MovingSphere::MovingSphere(Vec3D center0, Vec3D center1, double t0, double t1,
+MovingSphere::MovingSphere(const Vec3D &center0, const Vec3D &center1, double t0, double t1,
 	double radius, Material *material): center0(center0),center1(center1),
 	time0(t0), time1(t1), radius(radius), material(material) {}
 
-bool MovingSphere::hit(const Ray &ray, double tMin, double tMax, HitRecord &record) const {
+bool MovingSphere::hit(const Ray &ray, double tmin, double tmax, HitRecord &record) const {
 	Vec3D oc = ray.origin - center(ray.time);
 	double a = dot(ray.direction, ray.direction);
 	double b = dot(oc, ray.direction);
@@ -55,7 +55,7 @@ bool MovingSphere::hit(const Ray &ray, double tMin, double tMax, HitRecord &reco
 	double discriminant = b * b - a * c;
 	if (discriminant > 0) {
 		double temp = (-b - sqrt(discriminant)) / a;
-		if (tMin < temp && temp < tMax) {
+		if (tmin < temp && temp < tmax) {
 			record.t = temp;
 			record.p = ray.pointAt(record.t);
 			record.normal = (record.p - center(ray.time)) / radius;
@@ -63,7 +63,7 @@ bool MovingSphere::hit(const Ray &ray, double tMin, double tMax, HitRecord &reco
 			return true;
 		}
 		temp = (-b + sqrt(discriminant)) / a;
-		if (tMin < temp && temp < tMax) {
+		if (tmin < temp && temp < tmax) {
 			record.t = temp;
 			record.p = ray.pointAt(record.t);
 			record.normal = (record.p - center(ray.time)) / radius;

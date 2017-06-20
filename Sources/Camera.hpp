@@ -10,26 +10,27 @@
 #define Camera_hpp
 
 #include "Ray.hpp"
+#include "Utility.hpp"
 
 class Camera {
-public:
-	Vec3D origin;
-	Vec3D low_left_corner;
-	Vec3D horizontal;
-	Vec3D vertical;
-	Vec3D u, v, w;
+protected:
+	Vec3D c, u, v;
+	Vec3D o, x, y;
 	double lens_radius;
-	double time0, time1;
+	double exposure_start_time, exposure_stop_time;
+public:
+	Camera() = default;
 	Camera(Vec3D lookfrom, Vec3D lookat, Vec3D vup, double vfov, double aspect,
-		   double aperture, double focus_dist, double time0, double time1);
+		double aperture, double focus_dist, double exposure_start_time,
+		double exposure_stop_time);
 	Ray emitRay(double s, double t) const;
 };
 
 inline Ray Camera::emitRay(double s, double t) const {
-	Vec3D rd = lens_radius * random_in_unit_disk();
-	Vec3D offset = u * rd.x + v * rd.y;
-	double time = time0 + drand() * (time1 - time0);
-	return Ray(origin + offset, low_left_corner + s * horizontal + t * vertical - origin - offset, time);
+	Vec3D random_radius = random_in_unit_disk() * lens_radius;
+	Vec3D offset = u * random_radius.x + v * random_radius.y;
+	double time = exposure_start_time + drand() * (exposure_stop_time - exposure_start_time);
+	return Ray(c + offset, o + x * s + y * t - c - offset, time);
 }
 
 #endif /* Camera_hpp */

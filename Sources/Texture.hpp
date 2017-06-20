@@ -17,18 +17,20 @@ public:
 };
 
 class ConstantTexture: public Texture {
-public:
+protected:
 	Vec3D color;
-	ConstantTexture(Vec3D color);
+public:
+	ConstantTexture(const Vec3D &color);
 	virtual Vec3D value(double u, double v, const Vec3D &p) const;
 };
 
 class CheckerTexture: public Texture {
-public:
+protected:
 	Texture *odd;
 	Texture *even;
-	double ratio;
-	CheckerTexture(Texture *odd, Texture *even, double ratio = 2.0);
+	double scale;
+public:
+	CheckerTexture(Texture *odd, Texture *even, double scale = 2.0);
 	virtual Vec3D value(double u, double v, const Vec3D &p) const;
 };
 

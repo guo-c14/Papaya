@@ -10,30 +10,25 @@
 #define Vec3D_hpp
 
 #include <cmath>
-#include "Utility.hpp"
 
 class Vec3D {
-public:
+protected:
 	double elem[3];
+public:
 	double &x = elem[0];
 	double &y = elem[1];
 	double &z = elem[2];
-	
-	Vec3D(double d = 0.0);
+	Vec3D(double d = 0);
 	Vec3D(double x, double y, double z);
 	Vec3D(const Vec3D &v);
-	
 	Vec3D &operator=(const Vec3D &v);
 	Vec3D &operator+=(const Vec3D &v);
 	Vec3D &operator-=(const Vec3D &v);
 	Vec3D &operator*=(const Vec3D &v);
 	Vec3D &operator/=(const Vec3D &v);
-	
 	Vec3D operator-() const;
-	
 	double operator[](int index) const;
 	double &operator[](int index);
-	
 	double norm() const;
 	double norm2() const;
 	Vec3D &normalize();
@@ -143,44 +138,6 @@ inline double distance2(const Vec3D &v1, const Vec3D &v2) {
 
 inline Vec3D normalize(const Vec3D &v) {
 	return v / norm(v);
-}
-
-inline double schlick(double cosine, double ref_idx) {
-	double r0 = (1.0 - ref_idx) / (1.0 + ref_idx);
-	r0 = r0 * r0;
-	return r0 + (1.0 - r0) * pow((1.0 - cosine), 5);
-}
-
-inline bool refract(const Vec3D &v, const Vec3D &n, double ni_over_nt, Vec3D &refracted) {
-	Vec3D uv = normalize(v);
-	double dt = dot(uv, n);
-	double discriminant = 1.0 - ni_over_nt * ni_over_nt * (1.0 - dt * dt);
-	if (discriminant > 0.0) {
-		refracted = ni_over_nt * (uv - n * dt) - n * sqrt(discriminant);
-		return true;
-	}
-	else
-		return false;
-}
-
-inline Vec3D reflect(const Vec3D &v, const Vec3D &n) {
-	return v - 2.0 * dot(v, n) * n;
-}
-
-inline Vec3D random_in_unit_sphere() {
-	Vec3D p;
-	do {
-		p = 2.0 * Vec3D(drand(), drand(), drand()) - 1.0;
-	} while (p.norm2() >= 1.0);
-	return p;
-}
-
-inline Vec3D random_in_unit_disk() {
-	Vec3D p;
-	do {
-		p = 2.0 * Vec3D(drand(), drand(), 0.0) - Vec3D(1.0, 1.0, 0.0);
-	} while (dot(p, p) >= 1.0);
-	return p;
 }
 
 #endif /* Vec3D_hpp */

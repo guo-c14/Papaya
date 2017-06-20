@@ -9,21 +9,25 @@
 #ifndef Canvas_hpp
 #define Canvas_hpp
 
-#include <string>
-#include <vector>
-#include "Color.hpp"
+#include "Camera.hpp"
+#include "Object.hpp"
 #include "ImageIO.hpp"
 
-using std::string;
-using std::vector;
-
 class Canvas {
-	ImageIO *imageIO;
-public:
+protected:
+	int width, height;
+	int samples_per_pixel;
+	int iteration_depth;
+	Camera camera;
+	Object *scene;
 	vector<vector<Color>> pixels;
-	Canvas(ImageIO *imageIO = nullptr);
-	void setImageFormat(ImageFormat format);
-	void exportImage(const string &fileName) const;
+	void callFromThread(int start_row, int end_row);
+	Vec3D computeColor(const Ray &ray, const Object *scene, int depth);
+public:
+	Canvas(int width = 800, int height = 450, int samples_per_pixel = 128,
+		int iteration_depth = 64);
+	void render(const Camera &camera, Object *scene, int threads_num = 4);
+	void exportImage(const string &fileName, ImageFormat format) const;
 };
 
 #endif /* Canvas_hpp */

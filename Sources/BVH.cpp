@@ -7,16 +7,17 @@
 //
 
 #include <cstdlib>
+#include <iostream>
 #include "BVH.hpp"
 
 inline int compareX(const void *a, const void *b) {
-	Box leftBox, rightBox;
+	Box left_box, right_box;
 	Object *ao = *(Object **)a;
 	Object *bo = *(Object **)b;
-	if (!ao->boundingBox(0, 0, leftBox) || !bo->boundingBox(0, 0, rightBox)) {
-		
+	if (!ao->boundingBox(0, 0, left_box) || !bo->boundingBox(0, 0, right_box)) {
+		std::cerr << "No Bouding Box at all." << std::endl;
 	}
-	if (leftBox.min.x < rightBox.min.x) {
+	if (left_box.min.x < right_box.min.x) {
 		return -1;
 	} else {
 		return 1;
@@ -24,13 +25,13 @@ inline int compareX(const void *a, const void *b) {
 }
 
 inline int compareY(const void *a, const void *b) {
-	Box leftBox, rightBox;
+	Box left_box, right_box;
 	Object *ao = *(Object **)a;
 	Object *bo = *(Object **)b;
-	if (!ao->boundingBox(0, 0, leftBox) || !bo->boundingBox(0, 0, rightBox)) {
-		
+	if (!ao->boundingBox(0, 0, left_box) || !bo->boundingBox(0, 0, right_box)) {
+		std::cerr << "No Bouding Box at all." << std::endl;
 	}
-	if (leftBox.min.y < rightBox.min.y) {
+	if (left_box.min.y < right_box.min.y) {
 		return -1;
 	} else {
 		return 1;
@@ -38,13 +39,13 @@ inline int compareY(const void *a, const void *b) {
 }
 
 inline int compareZ(const void *a, const void *b) {
-	Box leftBox, rightBox;
+	Box left_box, right_box;
 	Object *ao = *(Object **)a;
 	Object *bo = *(Object **)b;
-	if (!ao->boundingBox(0, 0, leftBox) || !bo->boundingBox(0, 0, rightBox)) {
-		
+	if (!ao->boundingBox(0, 0, left_box) || !bo->boundingBox(0, 0, right_box)) {
+		std::cerr << "No Bouding Box at all." << std::endl;
 	}
-	if (leftBox.min.z < rightBox.min.z) {
+	if (left_box.min.z < right_box.min.z) {
 		return -1;
 	} else {
 		return 1;
@@ -69,10 +70,12 @@ BVH::BVH(Object **list, int n, double time0, double time1) {
 		left = new BVH(list, n / 2, time0, time1);
 		right = new BVH(list + n / 2, n - n / 2, time0, time1);
 	}
-	Box leftBox, rightBox;
-	if (!left->boundingBox(time0, time1, leftBox) ||
-		!right->boundingBox(time0, time1, rightBox)) {}
-	box = surroundBox(leftBox, rightBox);
+	Box left_box, right_box;
+	if (!left->boundingBox(time0, time1, left_box) ||
+		!right->boundingBox(time0, time1, right_box)) {
+		std::cerr << "No Bouding Box at all." << std::endl;
+	}
+	box = surroundBox(left_box, right_box);
 }
 
 bool BVH::hit(const Ray &ray, double tmin, double tmax, HitRecord &record) const {
