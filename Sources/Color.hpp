@@ -28,18 +28,20 @@ public:
 };
 
 inline Color &Color::operator=(const Vec3D &v) {
-	Vec3D normalized;
-	if (v.x < 0 || v.y < 0 || v.z < 0) {
-		normalized = (normalize(v) + 1) * 0.5;
-	} else if (v.x > 1 || v.y > 1 || v.z > 1) {
-		normalized = normalize(v);
-	} else {
-		normalized = v;
+	Vec3D normalized = v;
+	if (normalized.x > 1) {
+		normalized.x = 1;
+	}
+	if (normalized.y > 1) {
+		normalized.y = 1;
+	}
+	if (normalized.z > 1) {
+		normalized.z = 1;
 	}
 	normalized = Vec3D {
-		pow(normalized.x, 0.4),
-		pow(normalized.y, 0.4),
-		pow(normalized.z, 0.4)
+		pow(normalized.x, 0.5),
+		pow(normalized.y, 0.5),
+		pow(normalized.z, 0.5)
 	};
 	normalized *= 255.999;
 	r = static_cast<uint8_t>(normalized.x);

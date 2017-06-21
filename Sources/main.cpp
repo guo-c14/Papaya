@@ -27,14 +27,14 @@ Object **cornell_box(int &i) {
 	Material *red = new Diffuse({0.65, 0.05, 0.05});
 	Material *white = new Diffuse({0.73, 0.73, 0.73});
 	Material *green = new Diffuse({0.12, 0.45, 0.15});
-	Material *light = new DiffuseLight(1);
+	Material *light = new DiffuseLight(16);
 	list[i++] = new FlipNormal(new RectangleYZ(0, 555, 0, 555, 555, red));
 	list[i++] = new RectangleYZ(0, 555, 0, 555, 0, green);
-	list[i++] = new RectangleXZ(150, 405, 150, 405, 554, light);
+	list[i++] = new RectangleXZ(200, 355, 200, 355, 554, light);
 	list[i++] = new FlipNormal(new RectangleXZ(0, 555, 0, 555, 555, white));
 	list[i++] = new RectangleXZ(0, 555, 0, 555, 0, white);
 	list[i++] = new FlipNormal(new RectangleXY(0, 555, 0, 555, 555, white));
-	list[i++] = new Translate(new Sphere(80, 80, new Dielectric(1.55, {0.4, 1, 0.4})), {300, 0, 65});
+	list[i++] = new Translate(new Sphere(80, 80, new Dielectric(1.55, {0.12, 0.45, 0.15})), {300, 0, 65});
 	list[i++] = new Translate(new RotateY(new Cube(0, {165, 330, 165}, white), -15), {125, 0, 295});
 	return list;
 }
@@ -95,8 +95,8 @@ int main(int argc, const char *argv[]) {
 	int n = 0;
 	Object **list = cornell_box(n);
 	Object *scene = new BVH(list, n, 0, 1);
-	int width = 800;
-	int height = 450;
+	int width = 500;
+	int height = 500;
 //	Vec3D lookfrom(52, 8, 12);
 //	Vec3D lookat(0);
 	Vec3D lookfrom(278, 278, -800);
@@ -121,9 +121,9 @@ int main(int argc, const char *argv[]) {
 		exposure_start_time,
 		exposure_stop_time
 	};
-	Canvas canvas(width, height, 1024, 128);
+	Canvas canvas(width, height, 4096, 256);
 //	Canvas canvas(width, height);
-	canvas.render(camera, scene, 4);
+	canvas.render(camera, scene, 8);
 	canvas.exportImage("../../../Outputs/1.ppm", ppm);
 	return 0;
 }

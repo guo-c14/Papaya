@@ -43,7 +43,6 @@ Dielectric::Dielectric(double ref_idx, const Vec3D &color): ref_idx(ref_idx), co
 
 bool Dielectric::scatter(const Ray &incident, const HitRecord &record,
 	Vec3D &attenuation, Ray &scattered) const  {
-	attenuation = color;
 	Vec3D reflected = reflect(incident.direction, record.normal);
 	Vec3D refracted;
 	Vec3D outward_normal;
@@ -68,9 +67,13 @@ bool Dielectric::scatter(const Ray &incident, const HitRecord &record,
 	}
 	else
 		reflect_prob = 1.0;
-	if (drand() < reflect_prob)
+	if (drand() < reflect_prob) {
+		attenuation = 1;
 		scattered = Ray(record.p, reflected, incident.time);
-	else
+	}
+	else {
+		attenuation = color;
 		scattered = Ray(record.p, refracted, incident.time);
+	}
 	return true;
 }
