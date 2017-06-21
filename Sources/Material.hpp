@@ -51,4 +51,18 @@ public:
 		Vec3D &attenuation, Ray &scattered) const;
 };
 
+class GeneralMaterial: public Material {
+protected:
+	Vec3D proportion;
+	Texture *texture;
+	Vec3D refract_color;
+	double fuzz;
+	double ref_idx;
+public:
+	GeneralMaterial(const Vec3D &proportion, const Vec3D &reflect_color, double fuzz, const Vec3D &refract_color, double ref_idx);
+	GeneralMaterial(const Vec3D &proportion, Texture *texture, double fuzz, const Vec3D &refract_color, double ref_idx);
+	virtual bool scatter(const Ray &incident, const HitRecord &record,
+		Vec3D &attenuation, Ray &scattered) const;
+};
+
 #endif /* Material_hpp */

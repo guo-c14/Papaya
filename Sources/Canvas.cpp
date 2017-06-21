@@ -32,9 +32,9 @@ Vec3D Canvas::computeColor(const Ray &ray, const Object *scene, int depth) {
 Canvas::Canvas(int width, int height, int samples_per_pixel, int iteration_depth):
 	width(width), height(height), samples_per_pixel(samples_per_pixel),
 	iteration_depth(iteration_depth) {
-	pixels = vector<vector<Color>>(height);
+	pixels = vector<vector<Vec3D>>(height);
 	for (int i = 0; i < height; i++) {
-		pixels[i] = vector<Color>(width);
+		pixels[i] = vector<Vec3D>(width);
 	}
 }
 
@@ -64,7 +64,7 @@ void Canvas::callFromThread(int start_row, int end_row) {
 		for (int j = 0; j < width; j++) {
 			Vec3D col;
 			for (int k = 0; k < samples_per_pixel; k++) {
-				double u = 1.0 - static_cast<double>(j + drand()) / width;
+				double u = static_cast<double>(j + drand()) / width;
 				double v = 1.0 - static_cast<double>(i + drand()) / height;
 				Ray ray(camera.emitRay(u, v));
 				col += computeColor(ray, scene, 0);

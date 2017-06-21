@@ -10,7 +10,7 @@
 
 RectangleXY::RectangleXY(double x0, double x1, double y0, double y1, double k,
 	Material *material): x0(x0), x1(x1), y0(y0), y1(y1), k(k),
-	material(material){}
+	material(material) {}
 
 bool RectangleXY::hit(const Ray &ray, double tmin, double tmax, HitRecord &record) const {
 	double t = (k - ray.origin.z) / ray.direction.z;
@@ -25,6 +25,8 @@ bool RectangleXY::hit(const Ray &ray, double tmin, double tmax, HitRecord &recor
 	record.t = t;
 	record.material = material;
 	record.p = ray.pointAt(t);
+	record.u = (record.p.x - x0) / (x1 - x0);
+	record.v = (record.p.y - y0) / (y1 - y0);
 	record.normal = {0, 0, 1};
 	return true;
 }
@@ -36,7 +38,7 @@ bool RectangleXY::boundingBox(double t0, double t1, BBox &box) const {
 
 RectangleYZ::RectangleYZ(double y0, double y1, double z0, double z1, double k,
 	Material *material): y0(y0), y1(y1), z0(z0), z1(z1), k(k),
-	material(material){}
+	material(material) {}
 
 bool RectangleYZ::hit(const Ray &ray, double tmin, double tmax, HitRecord &record) const {
 	double t = (k - ray.origin.x) / ray.direction.x;
@@ -51,6 +53,8 @@ bool RectangleYZ::hit(const Ray &ray, double tmin, double tmax, HitRecord &recor
 	record.t = t;
 	record.material = material;
 	record.p = ray.pointAt(t);
+	record.u = (record.p.y - y0) / (y1 - y0);
+	record.v = (record.p.z - z0) / (z1 - z0);
 	record.normal = {1, 0, 0};
 	return true;
 }
@@ -61,7 +65,7 @@ bool RectangleYZ::boundingBox(double t0, double t1, BBox &box) const {
 }
 
 RectangleXZ::RectangleXZ(double x0, double x1, double z0, double z1, double k,
-	Material *material): x0(x0), x1(x1), z0(z0), z1(z1), k(k), material(material){}
+	Material *material): x0(x0), x1(x1), z0(z0), z1(z1), k(k), material(material) {}
 
 bool RectangleXZ::hit(const Ray &ray, double tmin, double tmax, HitRecord &record) const {
 	double t = (k - ray.origin.y) / ray.direction.y;
@@ -76,6 +80,8 @@ bool RectangleXZ::hit(const Ray &ray, double tmin, double tmax, HitRecord &recor
 	record.t = t;
 	record.material = material;
 	record.p = ray.pointAt(t);
+	record.u = (record.p.x - x0) / (x1 - x0);
+	record.v = (record.p.z - z0) / (z1 - z0);
 	record.normal = {0, 1, 0};
 	return true;
 }

@@ -8,6 +8,7 @@
 
 #include <ctime>
 #include <random>
+#include <functional>
 #include "Utility.hpp"
 
 double drand() {

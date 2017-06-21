@@ -16,7 +16,7 @@ void BMPIO::importImage(vector<vector<Vec3D>> &pixels, const string &fileName) {
 
 }
 
-void BMPIO::exportImage(const vector<vector<Color>> &pixels, const string &fileName) {
+void BMPIO::exportImage(const vector<vector<Vec3D>> &pixels, const string &fileName) {
 
 }
 
@@ -24,7 +24,7 @@ void JPGIO::importImage(vector<vector<Vec3D>> &pixels, const string &fileName) {
 	
 }
 
-void JPGIO::exportImage(const vector<vector<Color>> &pixels, const string &fileName) {
+void JPGIO::exportImage(const vector<vector<Vec3D>> &pixels, const string &fileName) {
 	
 }
 
@@ -32,7 +32,7 @@ void PNGIO::importImage(vector<vector<Vec3D>> &pixels, const string &fileName) {
 	
 }
 
-void PNGIO::exportImage(const vector<vector<Color>> &pixels, const string &fileName) {
+void PNGIO::exportImage(const vector<vector<Vec3D>> &pixels, const string &fileName) {
 	
 }
 
@@ -42,7 +42,9 @@ void PPMIO::importImage(vector<vector<Vec3D>> &pixels, const string &fileName) {
 	char *buffer = new char[size];
 	ifstream ifs;
 	ifs.open(fileName, std::ios::in|std::ios::binary);
-	ifs >> temp >> temp >> temp >> temp;
+	ifs >> temp;
+//	std::getline(ifs, temp);
+	ifs >> temp >> temp >> temp;
 	ifs.get();
 	ifs.read(buffer, size);
 	ifs.close();
@@ -54,12 +56,13 @@ void PPMIO::importImage(vector<vector<Vec3D>> &pixels, const string &fileName) {
 			pixels[i][j].y = static_cast<uint8_t>(buffer[3 * width * i + 3 * j + 1]);
 			pixels[i][j].z = static_cast<uint8_t>(buffer[3 * width * i + 3 * j + 2]);
 			pixels[i][j] /= 255;
+//			pixels[i][j] *= pixels[i][j];
 		}
 	}
 	delete [] buffer;
 }
 
-void PPMIO::exportImage(const vector<vector<Color>> &pixels, const string &fileName) {
+void PPMIO::exportImage(const vector<vector<Vec3D>> &pixels, const string &fileName) {
 	ofstream ofs;
 	ofs.open(fileName, std::ios::out);
 	ofs << "P6 "
@@ -71,7 +74,8 @@ void PPMIO::exportImage(const vector<vector<Color>> &pixels, const string &fileN
 	ofs.open(fileName, std::ios::app | std::ios::binary);
 	for (const auto &row: pixels) {
 		for (const auto &col: row) {
-			ofs << col.r << col.g << col.b;
+			Color color(col);
+			ofs << color.r << color.g << color.b;
 		}
 	}
 	ofs.close();

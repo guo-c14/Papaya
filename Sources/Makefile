@@ -1,6 +1,6 @@
 cxx = g++
 cxxflags = -Wall -std=c++11 -O3
-linkflags =
+linkflags = -pthread
 prom = Papaya
 deps = $(shell find ./ -name "*.hpp")
 src = $(shell find ./ -name "*.cpp")

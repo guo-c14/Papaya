@@ -20,7 +20,7 @@ protected:
 	int iteration_depth;
 	Camera camera;
 	Object *scene;
-	vector<vector<Color>> pixels;
+	vector<vector<Vec3D>> pixels;
 	void callFromThread(int start_row, int end_row);
 	Vec3D computeColor(const Ray &ray, const Object *scene, int depth);
 public:
