@@ -12,11 +12,13 @@
 #include <limits>
 #include "Vec3D.hpp"
 
+const double PI_2 = 6.283185307179586;
 const double PI = 3.141592653589793;
 const double PI_180 = 0.017453292519943295;
 const double PI_360 = 0.008726646259971648;
 const double MAX_DOUBLE = std::numeric_limits<double>::max();
 const double MIN_DOUBLE = std::numeric_limits<double>::min();
+const double FACTORIAL[13] = {1, 1, 2, 6, 24, 120, 720, 5040, 40320, 362880, 3628800, 39916800, 479001600};
 
 double drand();
 
@@ -58,6 +60,13 @@ inline Vec3D random_in_unit_disk() {
 		p = Vec3D(drand(), drand(), 0) * 2 - Vec3D(1, 1, 0);
 	} while (p.norm2() >= 1);
 	return p;
+}
+
+inline double bernstein(int n, int i, double t){
+	double B = FACTORIAL[n] / (FACTORIAL[i] * FACTORIAL[n - i]);
+	B *= pow(t, i);
+	B *= pow(1 - t, n - i);
+	return B;
 }
 
 #endif /* Utility_hpp */

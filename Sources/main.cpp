@@ -7,7 +7,6 @@
 //
 
 #include <iostream>
-
 #include "Canvas.hpp"
 #include "Camera.hpp"
 #include "Material.hpp"
@@ -17,7 +16,7 @@
 #include "Cube.hpp"
 #include "Light.hpp"
 #include "Utility.hpp"
-
+#include "BezierModel.hpp"
 #include <vector>
 
 using std::vector;
@@ -162,7 +161,7 @@ Object **random_scene(Camera &camera, int &i, int &width, int &height) {
 
 Object **scene_1(Camera &camera, int &i, int &width, int &height) {
 	i = 0;
-	width = 1200;
+	width = 1280;
 	height = 720;
 	Vec3D lookfrom(-40, 160, 200);
 	Vec3D lookat(0, 0, 0);
@@ -185,17 +184,40 @@ Object **scene_1(Camera &camera, int &i, int &width, int &height) {
 		exposure_stop_time
 	};
 	Object **list = new Object *[10];
+#ifdef XCODE
+	Texture *texture0 = new ImageTexture("../../../Textures/Floor.ppm", ppm, 600, 600);
+	Texture *texture1 = new ImageTexture("../../../Textures/EarthLowRes.ppm", ppm, 1024, 512);
+#else
 	Texture *texture0 = new ImageTexture("../Textures/Floor.ppm", ppm, 600, 600);
 	Texture *texture1 = new ImageTexture("../Textures/EarthLowRes.ppm", ppm, 1024, 512);
+#endif
 	Material *light = new DiffuseLight(3.6);
 //	list[i++] = new RectangleXZ(-140, 340, -540, -60, 240, light);
-	list[i++] = new Sphere({100, 260, -300}, 140, light);
-	list[i++] = new Sphere({-25, 10, 10}, 10, new GeneralMaterial({0, 0.7, 0.3}, {1, 1, 1}, 0.01, {0, 1, 1}, 1.55));
-	list[i++] = new Sphere({0, 10, 5}, 10, new GeneralMaterial({0, 0.5, 0.5}, {1, 1, 1}, 0.01, {1, 0, 1}, 1.5));
-	list[i++] = new Sphere({25, 10, 0}, 10, new GeneralMaterial({0, 0.3, 0.7}, {1, 1, 1}, 0.01, {1, 1, 0}, 1.45));
-	list[i++] = new Sphere({75, 20, -70}, 20, new GeneralMaterial({0, 0.1, 0.9}, {1, 1, 1}, 0.01, {0.5, 0.5, 1}, 1.4));
-	list[i++] = new Sphere({-25, 25, -55}, 25, new GeneralMaterial({0.7, 0.05, 0.25}, texture1, 0.02, {0.4, 0.4, 0.8}, 1.5));
-	list[i++] = new RectangleXZ(-320, 320, -320, 320, 0, new GeneralMaterial({0.96, 0.04, 0}, texture0, 0.02, 0, 0));
+	list[i++] = new Sphere({105, 260, -295}, 140, light);
+	list[i++] = new Sphere({-15, 10, 20}, 10, new GeneralMaterial({0, 0.7, 0.3}, {1, 1, 1}, 0.01, {0, 1, 1}, 1.55));
+	list[i++] = new Sphere({10, 10, 15}, 10, new GeneralMaterial({0, 0.5, 0.5}, {1, 1, 1}, 0.01, {1, 0, 1}, 1.5));
+	list[i++] = new Sphere({35, 10, 10}, 10, new GeneralMaterial({0, 0.3, 0.7}, {1, 1, 1}, 0.01, {1, 1, 0}, 1.45));
+//	list[i++] = new Sphere({75, 20, -70}, 20, new GeneralMaterial({0, 0.1, 0.9}, {1, 1, 1}, 0.01, {0.5, 0.5, 1}, 1.4));
+	vector<Vec3D> points{{11, 2, 0}, {20, 7, 0}, {20, 27, 0}, {9, 22, 0}, {5, 62, 0}};
+	list[i++] = new Translate {
+		new FlipNormal{
+			new BezierModel {
+				BezierCurve(points),
+				new GeneralMaterial({0, 0.1, 0.9}, {1, 1, 1}, 0.01, {0.5, 0.5, 1}, 1.4)
+			}
+		},
+		{55, 0, -50}
+	};
+	vector<Vec3D> points1{{14, 0, 0}, {24, 8, 0}, {24, 30, 0}, {12, 24, 0}, {8, 66, 0}};
+	list[i++] = new Translate {
+		new BezierModel{
+			BezierCurve(points1),
+			new GeneralMaterial({0, 0.1, 0.9}, {1, 1, 1}, 0.01, {0.5, 0.5, 1}, 1.4)
+		},
+		{55, 0, -50}
+	};
+	list[i++] = new Sphere({-15, 25, -45}, 25, new GeneralMaterial({0.7, 0.05, 0.25}, texture1, 0.02, {0.4, 0.4, 0.8}, 1.5));
+	list[i++] = new RectangleXZ(-400, 360, -400, 360, 0, new GeneralMaterial({0.96, 0.04, 0}, texture0, 0.02, 0, 0));
 	return list;
 }
 
@@ -205,8 +227,12 @@ int main(int argc, const char *argv[]) {
 	Object **list = scene_1(camera, n, width, height);
 	Object *scene = new BVH(list, n, 0, 1);
 	Canvas canvas(width, height, 4096, 64);
-//	Canvas canvas(width, height);
-	canvas.render(camera, scene, 4);
+//	Canvas canvas(width, height, 10, 50);
+	canvas.render(camera, scene, 8);
+#ifdef XCODE
+	canvas.exportImage("../../../Outputs/1.ppm", ppm);
+#else
 	canvas.exportImage("../Outputs/1.ppm", ppm);
+#endif
 	return 0;
 }

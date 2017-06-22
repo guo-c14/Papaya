@@ -24,6 +24,8 @@
 		A20C87661EF96B5700732DB6 /* Light.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A20C87641EF96B5700732DB6 /* Light.cpp */; };
 		A20C87691EF96FB900732DB6 /* Rectangle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A20C87671EF96FB900732DB6 /* Rectangle.cpp */; };
 		A20C876C1EF9955F00732DB6 /* Cube.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A20C876A1EF9955F00732DB6 /* Cube.cpp */; };
+		A20C87721EFAC8A300732DB6 /* BezierCurve.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A20C87701EFAC8A300732DB6 /* BezierCurve.cpp */; };
+		A20C87751EFADA5E00732DB6 /* BezierModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A20C87731EFADA5E00732DB6 /* BezierModel.cpp */; };
 		A2FD95251EF48EE7000F01FF /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2FD95241EF48EE7000F01FF /* main.cpp */; };
 /* End PBXBuildFile section */
 
@@ -74,6 +76,10 @@
 		A20C87681EF96FB900732DB6 /* Rectangle.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Rectangle.hpp; sourceTree = "<group>"; };
 		A20C876A1EF9955F00732DB6 /* Cube.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Cube.cpp; sourceTree = "<group>"; };
 		A20C876B1EF9955F00732DB6 /* Cube.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Cube.hpp; sourceTree = "<group>"; };
+		A20C87701EFAC8A300732DB6 /* BezierCurve.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BezierCurve.cpp; sourceTree = "<group>"; };
+		A20C87711EFAC8A300732DB6 /* BezierCurve.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BezierCurve.hpp; sourceTree = "<group>"; };
+		A20C87731EFADA5E00732DB6 /* BezierModel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BezierModel.cpp; sourceTree = "<group>"; };
+		A20C87741EFADA5E00732DB6 /* BezierModel.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BezierModel.hpp; sourceTree = "<group>"; };
 		A2FD951A1EF48E99000F01FF /* Papaya */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Papaya; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2FD95241EF48EE7000F01FF /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -132,8 +138,6 @@
 				A20C874C1EF7690800732DB6 /* BVH.cpp */,
 				A20C87471EF763EC00732DB6 /* BBox.hpp */,
 				A20C87461EF763EC00732DB6 /* BBox.cpp */,
-				A20C87501EF769F700732DB6 /* Object.hpp */,
-				A20C874F1EF769F700732DB6 /* Object.cpp */,
 				A20C87591EF7773F00732DB6 /* Sphere.hpp */,
 				A20C87581EF7773F00732DB6 /* Sphere.cpp */,
 				A20C87681EF96FB900732DB6 /* Rectangle.hpp */,
@@ -144,6 +148,12 @@
 				A20C875B1EF7777800732DB6 /* Material.cpp */,
 				A20C87441EF75B0000732DB6 /* Texture.hpp */,
 				A20C87431EF75B0000732DB6 /* Texture.cpp */,
+				A20C87501EF769F700732DB6 /* Object.hpp */,
+				A20C874F1EF769F700732DB6 /* Object.cpp */,
+				A20C87741EFADA5E00732DB6 /* BezierModel.hpp */,
+				A20C87731EFADA5E00732DB6 /* BezierModel.cpp */,
+				A20C87711EFAC8A300732DB6 /* BezierCurve.hpp */,
+				A20C87701EFAC8A300732DB6 /* BezierCurve.cpp */,
 			);
 			name = Papaya;
 			path = ../Sources;
@@ -208,6 +218,7 @@
 			files = (
 				A20C876C1EF9955F00732DB6 /* Cube.cpp in Sources */,
 				A20C874B1EF765D700732DB6 /* Ray.cpp in Sources */,
+				A20C87751EFADA5E00732DB6 /* BezierModel.cpp in Sources */,
 				A20C87361EF73CE800732DB6 /* Utility.cpp in Sources */,
 				A20C87661EF96B5700732DB6 /* Light.cpp in Sources */,
 				A20C87511EF769F700732DB6 /* Object.cpp in Sources */,
@@ -222,6 +233,7 @@
 				A20C873F1EF754E000732DB6 /* ImageIO.cpp in Sources */,
 				A20C87691EF96FB900732DB6 /* Rectangle.cpp in Sources */,
 				A20C87391EF7465E00732DB6 /* Vec3D.cpp in Sources */,
+				A20C87721EFAC8A300732DB6 /* BezierCurve.cpp in Sources */,
 				A20C87541EF76A4000732DB6 /* HitRecord.cpp in Sources */,
 				A20C87421EF7572C00732DB6 /* Canvas.cpp in Sources */,
 			);
@@ -262,8 +274,8 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
+					XCODE,
 					"DEBUG=1",
-					"$(inherited)",
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -271,6 +283,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = /usr/local/include;
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -307,12 +320,14 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = XCODE;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = /usr/local/include;
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
