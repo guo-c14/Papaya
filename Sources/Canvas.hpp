@@ -12,9 +12,11 @@
 #include "Camera.hpp"
 #include "Object.hpp"
 #include "ImageIO.hpp"
+#include "Texture.hpp"
 
 class Canvas {
 protected:
+	Texture *texture;
 	int width, height;
 	int samples_per_pixel;
 	int iteration_depth;

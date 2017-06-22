@@ -17,7 +17,6 @@
 		A20C874B1EF765D700732DB6 /* Ray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A20C87491EF765D700732DB6 /* Ray.cpp */; };
 		A20C874E1EF7690800732DB6 /* BVH.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A20C874C1EF7690800732DB6 /* BVH.cpp */; };
 		A20C87511EF769F700732DB6 /* Object.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A20C874F1EF769F700732DB6 /* Object.cpp */; };
-		A20C87541EF76A4000732DB6 /* HitRecord.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A20C87521EF76A4000732DB6 /* HitRecord.cpp */; };
 		A20C875A1EF7773F00732DB6 /* Sphere.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A20C87581EF7773F00732DB6 /* Sphere.cpp */; };
 		A20C875D1EF7777800732DB6 /* Material.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A20C875B1EF7777800732DB6 /* Material.cpp */; };
 		A20C87601EF77A4300732DB6 /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A20C875E1EF77A4300732DB6 /* Camera.cpp */; };
@@ -28,6 +27,7 @@
 		A20C87751EFADA5E00732DB6 /* BezierModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A20C87731EFADA5E00732DB6 /* BezierModel.cpp */; };
 		A20C87781EFB540000732DB6 /* Triangle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A20C87761EFB540000732DB6 /* Triangle.cpp */; };
 		A20C877B1EFB6DD600732DB6 /* Circle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A20C87791EFB6DD600732DB6 /* Circle.cpp */; };
+		A20C87811EFBFEFE00732DB6 /* ObjParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A20C877F1EFBFEFE00732DB6 /* ObjParser.cpp */; };
 		A2FD95251EF48EE7000F01FF /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2FD95241EF48EE7000F01FF /* main.cpp */; };
 /* End PBXBuildFile section */
 
@@ -64,7 +64,6 @@
 		A20C874D1EF7690800732DB6 /* BVH.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BVH.hpp; sourceTree = "<group>"; };
 		A20C874F1EF769F700732DB6 /* Object.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Object.cpp; sourceTree = "<group>"; };
 		A20C87501EF769F700732DB6 /* Object.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Object.hpp; sourceTree = "<group>"; };
-		A20C87521EF76A4000732DB6 /* HitRecord.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HitRecord.cpp; sourceTree = "<group>"; };
 		A20C87531EF76A4000732DB6 /* HitRecord.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = HitRecord.hpp; sourceTree = "<group>"; };
 		A20C87581EF7773F00732DB6 /* Sphere.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Sphere.cpp; sourceTree = "<group>"; };
 		A20C87591EF7773F00732DB6 /* Sphere.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Sphere.hpp; sourceTree = "<group>"; };
@@ -86,6 +85,9 @@
 		A20C87771EFB540000732DB6 /* Triangle.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Triangle.hpp; sourceTree = "<group>"; };
 		A20C87791EFB6DD600732DB6 /* Circle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Circle.cpp; sourceTree = "<group>"; };
 		A20C877A1EFB6DD600732DB6 /* Circle.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Circle.hpp; sourceTree = "<group>"; };
+		A20C877F1EFBFEFE00732DB6 /* ObjParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ObjParser.cpp; sourceTree = "<group>"; };
+		A20C87801EFBFEFE00732DB6 /* ObjParser.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ObjParser.hpp; sourceTree = "<group>"; };
+		A20C87821EFCB6D200732DB6 /* Scene.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Scene.hpp; sourceTree = "<group>"; };
 		A2FD951A1EF48E99000F01FF /* Papaya */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Papaya; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2FD95241EF48EE7000F01FF /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -118,7 +120,6 @@
 			isa = PBXGroup;
 			children = (
 				A20C87531EF76A4000732DB6 /* HitRecord.hpp */,
-				A20C87521EF76A4000732DB6 /* HitRecord.cpp */,
 				A20C874D1EF7690800732DB6 /* BVH.hpp */,
 				A20C874C1EF7690800732DB6 /* BVH.cpp */,
 				A20C87591EF7773F00732DB6 /* Sphere.hpp */,
@@ -146,8 +147,6 @@
 				A20C87371EF7465E00732DB6 /* Vec3D.cpp */,
 				A20C87351EF73CE800732DB6 /* Utility.hpp */,
 				A20C87341EF73CE800732DB6 /* Utility.cpp */,
-				A20C873E1EF754E000732DB6 /* ImageIO.hpp */,
-				A20C873D1EF754E000732DB6 /* ImageIO.cpp */,
 				A20C873B1EF74EA100732DB6 /* Color.hpp */,
 				A20C873A1EF74EA100732DB6 /* Color.cpp */,
 				A20C874A1EF765D700732DB6 /* Ray.hpp */,
@@ -156,6 +155,10 @@
 				A20C87461EF763EC00732DB6 /* BBox.cpp */,
 				A20C87711EFAC8A300732DB6 /* BezierCurve.hpp */,
 				A20C87701EFAC8A300732DB6 /* BezierCurve.cpp */,
+				A20C873E1EF754E000732DB6 /* ImageIO.hpp */,
+				A20C873D1EF754E000732DB6 /* ImageIO.cpp */,
+				A20C87801EFBFEFE00732DB6 /* ObjParser.hpp */,
+				A20C877F1EFBFEFE00732DB6 /* ObjParser.cpp */,
 			);
 			name = Utility;
 			sourceTree = "<group>";
@@ -184,6 +187,7 @@
 				A20C877D1EFB7B0800732DB6 /* Objects */,
 				A20C877C1EFB7AD700732DB6 /* Materials */,
 				A2FD95241EF48EE7000F01FF /* main.cpp */,
+				A20C87821EFCB6D200732DB6 /* Scene.hpp */,
 				A20C87411EF7572C00732DB6 /* Canvas.hpp */,
 				A20C87401EF7572C00732DB6 /* Canvas.cpp */,
 				A20C875F1EF77A4300732DB6 /* Camera.hpp */,
@@ -261,6 +265,7 @@
 				A20C874E1EF7690800732DB6 /* BVH.cpp in Sources */,
 				A20C87481EF763EC00732DB6 /* BBox.cpp in Sources */,
 				A20C87781EFB540000732DB6 /* Triangle.cpp in Sources */,
+				A20C87811EFBFEFE00732DB6 /* ObjParser.cpp in Sources */,
 				A20C87451EF75B0000732DB6 /* Texture.cpp in Sources */,
 				A20C875D1EF7777800732DB6 /* Material.cpp in Sources */,
 				A20C877B1EFB6DD600732DB6 /* Circle.cpp in Sources */,
@@ -270,7 +275,6 @@
 				A20C87691EF96FB900732DB6 /* Rectangle.cpp in Sources */,
 				A20C87391EF7465E00732DB6 /* Vec3D.cpp in Sources */,
 				A20C87721EFAC8A300732DB6 /* BezierCurve.cpp in Sources */,
-				A20C87541EF76A4000732DB6 /* HitRecord.cpp in Sources */,
 				A20C87421EF7572C00732DB6 /* Canvas.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

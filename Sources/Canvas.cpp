@@ -19,6 +19,13 @@ iteration_depth(iteration_depth) {
 	for (int i = 0; i < height; i++) {
 		pixels[i] = vector<Vec3D>(width);
 	}
+#ifdef XCODE
+	texture = new ImageTexture("../../../Textures/Room.ppm", ppm, 2048, 1024);
+//	texture = new ImageTexture("../../../Textures/Home.ppm", ppm, 4000, 2000);
+#else
+	//	texture = new ImageTexture("../Textures/Room.ppm", ppm, 2048, 1024);
+//	texture = new ImageTexture("../Textures/Home.ppm", ppm, 4000, 2000);
+#endif
 }
 
 Vec3D Canvas::computeColor(const Ray &ray, const Object *scene, int depth) {
@@ -34,7 +41,8 @@ Vec3D Canvas::computeColor(const Ray &ray, const Object *scene, int depth) {
 		}
 	}
 	else {
-		return 0;
+//		return 0;
+		return texture->value(0.5 - 0.5 * ray.direction.x, 0.5 * ray.direction.y + 0.5, 0);
 	}
 }
 

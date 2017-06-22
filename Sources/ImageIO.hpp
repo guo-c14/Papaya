@@ -9,10 +9,13 @@
 #ifndef ImageIO_hpp
 #define ImageIO_hpp
 
+#include <fstream>
 #include <string>
 #include <vector>
 #include "Color.hpp"
 
+using std::ifstream;
+using std::ofstream;
 using std::string;
 using std::vector;
 

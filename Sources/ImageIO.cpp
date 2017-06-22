@@ -6,11 +6,7 @@
 //  Copyright © 2017 Guo Chen. All rights reserved.
 //
 
-#include <fstream>
 #include "ImageIO.hpp"
-
-using std::ifstream;
-using std::ofstream;
 
 void BMPIO::importImage(vector<vector<Vec3D>> &pixels, const string &fileName) {
 
@@ -54,7 +50,6 @@ void PPMIO::importImage(vector<vector<Vec3D>> &pixels, const string &fileName) {
 			pixels[i][j].y = static_cast<uint8_t>(buffer[3 * width * i + 3 * j + 1]);
 			pixels[i][j].z = static_cast<uint8_t>(buffer[3 * width * i + 3 * j + 2]);
 			pixels[i][j] /= 255;
-//			pixels[i][j] *= pixels[i][j];
 		}
 	}
 	delete [] buffer;

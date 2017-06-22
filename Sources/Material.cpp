@@ -78,12 +78,12 @@ bool Dielectric::scatter(const Ray &incident, const HitRecord &record,
 	return true;
 }
 
-GeneralMaterial::GeneralMaterial(const Vec3D &proportion, const Vec3D &reflect_color, double fuzz, const Vec3D &refract_color, double ref_idx): proportion(proportion), texture(new ConstantTexture(reflect_color)), fuzz(fuzz), refract_color(refract_color), ref_idx(ref_idx) {}
+GeneralMaterial::GeneralMaterial(const Vec3D &proportion, const Vec3D &reflect_color, double fuzz, const Vec3D &refract_color, double ref_idx): proportion(proportion), texture(new ConstantTexture(reflect_color)), fuzz(fuzz), refract_color(refract_color), ref_idx(ref_idx) {
+	this->proportion /= (proportion.x + proportion.y + proportion.z);
+}
 
 GeneralMaterial::GeneralMaterial(const Vec3D &proportion, Texture *texture, double fuzz, const Vec3D &refract_color, double ref_idx): proportion(proportion), texture(texture), fuzz(fuzz), refract_color(refract_color), ref_idx(ref_idx) {
 	this->proportion /= (proportion.x + proportion.y + proportion.z);
-	this->proportion.y += this->proportion.x;
-	this->proportion.z = 1;
 }
 
 bool GeneralMaterial::scatter(const Ray &incident, const HitRecord &record,
@@ -94,7 +94,7 @@ bool GeneralMaterial::scatter(const Ray &incident, const HitRecord &record,
 		scattered = Ray(record.p, target - record.p, incident.time);
 		attenuation = texture->value(record.u, record.v, record.p);
 		return true;
-	} else if (rand_num < proportion.y) {
+	} else if (rand_num < proportion.x + proportion.y) {
 		Vec3D reflected = reflect(incident.direction, record.normal);
 		scattered = Ray(record.p, reflected + fuzz * random_in_unit_sphere(), incident.time);
 		attenuation = texture->value(record.u, record.v, record.p);
@@ -125,7 +125,7 @@ bool GeneralMaterial::scatter(const Ray &incident, const HitRecord &record,
 		else
 			reflect_prob = 1.0;
 		if (drand() < reflect_prob) {
-			attenuation = 1;
+			attenuation = texture->value(record.u, record.v, record.p);
 			scattered = Ray(record.p, reflected, incident.time);
 		}
 		else {

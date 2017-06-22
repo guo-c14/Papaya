@@ -19,7 +19,7 @@ protected:
 	Vec3D &v2 = vertex[2];
 	Material *material;
 public:
-	Vec3D normal; // default normal = (v0, v1) cross (v0, v2)
+	Vec3D normal;
 	Triangle(const Vec3D &v0, const Vec3D &v1, const Vec3D &v2, Material *material);
 	virtual bool hit(const Ray &ray, double tmin, double tmax, HitRecord &record) const;
 	virtual bool boundingBox(double t0, double t1, BBox &box) const;

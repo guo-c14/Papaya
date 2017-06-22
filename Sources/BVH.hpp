@@ -9,7 +9,6 @@
 #ifndef BVH_hpp
 #define BVH_hpp
 
-#include "BBox.hpp"
 #include "Object.hpp"
 
 class BVH: public Object {

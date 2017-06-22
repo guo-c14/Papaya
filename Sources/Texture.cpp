@@ -51,7 +51,7 @@ ImageTexture::ImageTexture(const string &fileName, ImageFormat format,
 }
 
 Vec3D ImageTexture::value(double u, double v, const Vec3D &p) const {
-	int row = (1 - v) * height - 0.001;
+	int row = (1 - v) * height - 0.0001;
 	if (row < 0) {
 		row = 0;
 	}

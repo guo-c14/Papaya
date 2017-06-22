@@ -9,8 +9,8 @@
 #ifndef Sphere_hpp
 #define Sphere_hpp
 
-#include "Material.hpp"
 #include "Object.hpp"
+#include "Material.hpp"
 
 class Sphere: public Object {
 protected:

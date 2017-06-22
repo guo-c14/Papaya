@@ -6,23 +6,27 @@ C++ Path Tracer (路径追踪器)
 
 ### 渲染算法
 
-- Monte Carlo Path Tracing
+- Uniformly Distributed Path Tracing
 
-### 渲染效果
+### 实现特性
 
 - Anti-aliasing
+- 软阴影
 - Material
 	- Diffuse
 	- Metal
 	- Dielectrics
+	- 通用材料模型（可自定义漫反射、镜面反射、折射的参数）
 - Texture
-- Defocus Blur
-- Motion Blur
-
-### 渲染加速
-
-- Multithreading
-- BVH (AABB)
+	- 棋盘
+	- uv贴图
+	- 环境光贴图
+- 景深
+- 运动模糊
+- 高次贝塞尔曲线旋转曲面
+- 复杂网格读写
+- BVH（AABB）
+- 多线程
 
 ## 效果
 
@@ -50,7 +54,7 @@ C++ Path Tracer (路径追踪器)
 
 ![](Outputs/Motion.ppm)
 
-### 固态纹理
+### 棋盘纹理
 
 ![](Outputs/Texture.ppm)
 
@@ -58,6 +62,16 @@ C++ Path Tracer (路径追踪器)
 
 ![](Outputs/CornellBox.ppm)
 
+### 贝塞尔曲线（四次）旋转面
+
+![](Outputs/Bezier.ppm)
+
 ### Others
 
 ![](Outputs/Others.ppm)
+
+### 网格模型
+
+![](Outputs/Dragon.ppm)
+
+![](Outputs/DragonCornell.ppm)
