@@ -111,7 +111,7 @@ bool BezierModel::hit(const Ray &ray, double tmin, double tmax, HitRecord &recor
 		record.normal = normalAt(next_solution[1], next_solution[2]);
 		record.material = material;
 		record.u = next_solution[2] / PI_2;
-		record.v = (curve.pointAt(next_solution[1]).y - bbox.min.y) / (bbox.max.y - bbox.min.y);
+		record.v = 1 - next_solution[1];
 		return true;
 	}
 	return false;

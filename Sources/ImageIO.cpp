@@ -41,10 +41,8 @@ void PPMIO::importImage(vector<vector<Vec3D>> &pixels, const string &fileName) {
 	int size = static_cast<int>(3 * pixels.size() * pixels[0].size());
 	char *buffer = new char[size];
 	ifstream ifs;
-	ifs.open(fileName, std::ios::in|std::ios::binary);
-	ifs >> temp;
-//	std::getline(ifs, temp);
-	ifs >> temp >> temp >> temp;
+	ifs.open(fileName, std::ios::in | std::ios::binary);
+	ifs >> temp >> temp >> temp >> temp;
 	ifs.get();
 	ifs.read(buffer, size);
 	ifs.close();

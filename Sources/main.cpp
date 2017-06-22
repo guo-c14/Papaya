@@ -17,6 +17,8 @@
 #include "Light.hpp"
 #include "Utility.hpp"
 #include "BezierModel.hpp"
+#include "Triangle.hpp"
+#include "Circle.hpp"
 #include <vector>
 
 using std::vector;
@@ -49,10 +51,11 @@ Object **cornell_box(Camera &camera, int &i, int &width, int &height) {
 	Material *red = new Diffuse({0.65, 0.05, 0.05});
 	Material *white = new Diffuse({0.73, 0.73, 0.73});
 	Material *green = new Diffuse({0.12, 0.45, 0.15});
-	Material *light = new DiffuseLight(1);
+	Material *light = new DiffuseLight(4);
 	list[i++] = new FlipNormal(new RectangleYZ(0, 555, 0, 555, 555, red));
 	list[i++] = new RectangleYZ(0, 555, 0, 555, 0, green);
-	list[i++] = new RectangleXZ(200, 355, 200, 355, 554, light);
+//	list[i++] = new RectangleXZ(200, 355, 200, 355, 554, light);
+	list[i++] = new Triangle({177, 554, 200}, {277, 554, 373}, {377, 554, 200}, light);
 	list[i++] = new FlipNormal(new RectangleXZ(0, 555, 0, 555, 555, white));
 	list[i++] = new RectangleXZ(0, 555, 0, 555, 0, white);
 	list[i++] = new FlipNormal(new RectangleXY(0, 555, 0, 555, 555, white));
@@ -161,12 +164,12 @@ Object **random_scene(Camera &camera, int &i, int &width, int &height) {
 
 Object **scene_1(Camera &camera, int &i, int &width, int &height) {
 	i = 0;
-	width = 1280;
-	height = 720;
-	Vec3D lookfrom(-40, 160, 200);
+	width = 800;
+	height = 450;
+	Vec3D lookfrom(-85, 170, 165);
 	Vec3D lookat(0, 0, 0);
 	Vec3D vup(0, 1, 0);
-	double vfov = 40;
+	double vfov = 45;
 	double aspect = static_cast<double>(width) / static_cast<double>(height);
 	double aperture = 0;
 	double focus_dist = distance(lookfrom, lookat);
@@ -183,41 +186,51 @@ Object **scene_1(Camera &camera, int &i, int &width, int &height) {
 		exposure_start_time,
 		exposure_stop_time
 	};
-	Object **list = new Object *[10];
+	Object **list = new Object *[15];
 #ifdef XCODE
 	Texture *texture0 = new ImageTexture("../../../Textures/Floor.ppm", ppm, 600, 600);
 	Texture *texture1 = new ImageTexture("../../../Textures/EarthLowRes.ppm", ppm, 1024, 512);
+	Texture *texture2 = new ImageTexture("../../../Textures/BlueGlass.ppm", ppm, 600, 417);
+	Texture *texture3 = new ImageTexture("../../../Textures/Marble.ppm", ppm, 1024, 1024);
 #else
 	Texture *texture0 = new ImageTexture("../Textures/Floor.ppm", ppm, 600, 600);
 	Texture *texture1 = new ImageTexture("../Textures/EarthLowRes.ppm", ppm, 1024, 512);
+	Texture *texture2 = new ImageTexture("../Textures/BlueGlass.ppm", ppm, 600, 417);
+	Texture *texture3 = new ImageTexture("../Textures/Marble.ppm", ppm, 1024, 1024);
 #endif
-	Material *light = new DiffuseLight(3.6);
+	Material *light = new DiffuseLight({3.6, 3.6, 3.6});
 //	list[i++] = new RectangleXZ(-140, 340, -540, -60, 240, light);
-	list[i++] = new Sphere({105, 260, -295}, 140, light);
+//	list[i++] = new RectangleXZ(-300, 220, -100, 420, 240, light);
+	list[i++] = new Sphere({125, 300, -295}, 150, light);
+//	list[i++] = new RectangleXZ(-220, 280, -320, 180, 300, light);
 	list[i++] = new Sphere({-15, 10, 20}, 10, new GeneralMaterial({0, 0.7, 0.3}, {1, 1, 1}, 0.01, {0, 1, 1}, 1.55));
 	list[i++] = new Sphere({10, 10, 15}, 10, new GeneralMaterial({0, 0.5, 0.5}, {1, 1, 1}, 0.01, {1, 0, 1}, 1.5));
 	list[i++] = new Sphere({35, 10, 10}, 10, new GeneralMaterial({0, 0.3, 0.7}, {1, 1, 1}, 0.01, {1, 1, 0}, 1.45));
 //	list[i++] = new Sphere({75, 20, -70}, 20, new GeneralMaterial({0, 0.1, 0.9}, {1, 1, 1}, 0.01, {0.5, 0.5, 1}, 1.4));
-	vector<Vec3D> points{{11, 2, 0}, {20, 7, 0}, {20, 27, 0}, {9, 22, 0}, {5, 62, 0}};
-	list[i++] = new Translate {
-		new FlipNormal{
-			new BezierModel {
-				BezierCurve(points),
-				new GeneralMaterial({0, 0.1, 0.9}, {1, 1, 1}, 0.01, {0.5, 0.5, 1}, 1.4)
-			}
-		},
-		{55, 0, -50}
-	};
+//	list[i++] = new Sphere({55, 0, -50}, 14, new GeneralMaterial({0, 0.1, 0.9}, {1, 1, 1}, 0.01, {0.5, 0.5, 1}, 1.4));
+//	list[i++] = new Sphere({55, 66, -50}, 8, new GeneralMaterial({0, 0.1, 0.9}, {1, 1, 1}, 0.01, {0.5, 0.5, 1}, 1.4));
+//	vector<Vec3D> points{{11, 2, 0}, {20, 7, 0}, {20, 27, 0}, {9, 22, 0}, {5, 62, 0}};
+//	list[i++] = new Translate {
+//		new FlipNormal{
+//			new BezierModel {
+//				BezierCurve(points),
+//				new GeneralMaterial({0, 0.1, 0.9}, {1, 1, 1}, 0.01, {0.5, 0.5, 1}, 1.4)
+//			}
+//		},
+//		{55, 0, -50}
+//	};
 	vector<Vec3D> points1{{14, 0, 0}, {24, 8, 0}, {24, 30, 0}, {12, 24, 0}, {8, 66, 0}};
 	list[i++] = new Translate {
 		new BezierModel{
 			BezierCurve(points1),
-			new GeneralMaterial({0, 0.1, 0.9}, {1, 1, 1}, 0.01, {0.5, 0.5, 1}, 1.4)
+			new GeneralMaterial({0, 0.2, 0.8}, {1, 1, 1}, 0.01, {1.0, 0.5, 0.5}, 1.4)
 		},
 		{55, 0, -50}
 	};
-	list[i++] = new Sphere({-15, 25, -45}, 25, new GeneralMaterial({0.7, 0.05, 0.25}, texture1, 0.02, {0.4, 0.4, 0.8}, 1.5));
-	list[i++] = new RectangleXZ(-400, 360, -400, 360, 0, new GeneralMaterial({0.96, 0.04, 0}, texture0, 0.02, 0, 0));
+	list[i++] = new Circle({55, 0, -50}, {0, -1, 0}, 14, new GeneralMaterial({0, 0.2, 0.8}, {1, 1, 1}, 0.01, {1.0, 0.5, 0.5}, 1.4));
+	list[i++] = new Circle({55, 66, -50}, {0, 1, 0}, 8, new GeneralMaterial({0, 0.2, 0.8}, {1, 1, 1}, 0.01, {1.0, 0.5, 0.5}, 1.4));
+	list[i++] = new Sphere({-15, 25, -45}, 25, new GeneralMaterial({0, 0.1, 0.9}, {1, 1, 1}, 0.01, {0.5, 0.5, 1}, 1.4));
+	list[i++] = new RectangleXZ(-450, 450, -450, 450, 0, new GeneralMaterial({0.96, 0.04, 0}, texture0, 0.02, 0, 0));
 	return list;
 }
 
@@ -226,7 +239,7 @@ int main(int argc, const char *argv[]) {
 	int n, width, height;
 	Object **list = scene_1(camera, n, width, height);
 	Object *scene = new BVH(list, n, 0, 1);
-	Canvas canvas(width, height, 4096, 64);
+	Canvas canvas(width, height, 1024, 64);
 //	Canvas canvas(width, height, 10, 50);
 	canvas.render(camera, scene, 8);
 #ifdef XCODE

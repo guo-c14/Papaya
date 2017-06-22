@@ -12,9 +12,18 @@
 
 using std::thread;
 
+Canvas::Canvas(int width, int height, int samples_per_pixel, int iteration_depth):
+width(width), height(height), samples_per_pixel(samples_per_pixel),
+iteration_depth(iteration_depth) {
+	pixels = vector<vector<Vec3D>>(height);
+	for (int i = 0; i < height; i++) {
+		pixels[i] = vector<Vec3D>(width);
+	}
+}
+
 Vec3D Canvas::computeColor(const Ray &ray, const Object *scene, int depth) {
 	HitRecord record;
-	if (scene->hit(ray, 0.001, MAX_DOUBLE, record)) {
+	if (scene->hit(ray, 0.0001, MAX_DOUBLE, record)) {
 		Ray scattered;
 		Vec3D attenutation;
 		Vec3D emitted = record.material->emitRay();
@@ -26,15 +35,6 @@ Vec3D Canvas::computeColor(const Ray &ray, const Object *scene, int depth) {
 	}
 	else {
 		return 0;
-	}
-}
-
-Canvas::Canvas(int width, int height, int samples_per_pixel, int iteration_depth):
-	width(width), height(height), samples_per_pixel(samples_per_pixel),
-	iteration_depth(iteration_depth) {
-	pixels = vector<vector<Vec3D>>(height);
-	for (int i = 0; i < height; i++) {
-		pixels[i] = vector<Vec3D>(width);
 	}
 }
 

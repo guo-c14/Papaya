@@ -26,6 +26,8 @@
 		A20C876C1EF9955F00732DB6 /* Cube.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A20C876A1EF9955F00732DB6 /* Cube.cpp */; };
 		A20C87721EFAC8A300732DB6 /* BezierCurve.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A20C87701EFAC8A300732DB6 /* BezierCurve.cpp */; };
 		A20C87751EFADA5E00732DB6 /* BezierModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A20C87731EFADA5E00732DB6 /* BezierModel.cpp */; };
+		A20C87781EFB540000732DB6 /* Triangle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A20C87761EFB540000732DB6 /* Triangle.cpp */; };
+		A20C877B1EFB6DD600732DB6 /* Circle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A20C87791EFB6DD600732DB6 /* Circle.cpp */; };
 		A2FD95251EF48EE7000F01FF /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2FD95241EF48EE7000F01FF /* main.cpp */; };
 /* End PBXBuildFile section */
 
@@ -80,6 +82,10 @@
 		A20C87711EFAC8A300732DB6 /* BezierCurve.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BezierCurve.hpp; sourceTree = "<group>"; };
 		A20C87731EFADA5E00732DB6 /* BezierModel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BezierModel.cpp; sourceTree = "<group>"; };
 		A20C87741EFADA5E00732DB6 /* BezierModel.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BezierModel.hpp; sourceTree = "<group>"; };
+		A20C87761EFB540000732DB6 /* Triangle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Triangle.cpp; sourceTree = "<group>"; };
+		A20C87771EFB540000732DB6 /* Triangle.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Triangle.hpp; sourceTree = "<group>"; };
+		A20C87791EFB6DD600732DB6 /* Circle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Circle.cpp; sourceTree = "<group>"; };
+		A20C877A1EFB6DD600732DB6 /* Circle.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Circle.hpp; sourceTree = "<group>"; };
 		A2FD951A1EF48E99000F01FF /* Papaya */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Papaya; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2FD95241EF48EE7000F01FF /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -95,6 +101,65 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A20C877C1EFB7AD700732DB6 /* Materials */ = {
+			isa = PBXGroup;
+			children = (
+				A20C87651EF96B5700732DB6 /* Light.hpp */,
+				A20C87641EF96B5700732DB6 /* Light.cpp */,
+				A20C875C1EF7777800732DB6 /* Material.hpp */,
+				A20C875B1EF7777800732DB6 /* Material.cpp */,
+				A20C87441EF75B0000732DB6 /* Texture.hpp */,
+				A20C87431EF75B0000732DB6 /* Texture.cpp */,
+			);
+			name = Materials;
+			sourceTree = "<group>";
+		};
+		A20C877D1EFB7B0800732DB6 /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				A20C87531EF76A4000732DB6 /* HitRecord.hpp */,
+				A20C87521EF76A4000732DB6 /* HitRecord.cpp */,
+				A20C874D1EF7690800732DB6 /* BVH.hpp */,
+				A20C874C1EF7690800732DB6 /* BVH.cpp */,
+				A20C87591EF7773F00732DB6 /* Sphere.hpp */,
+				A20C87581EF7773F00732DB6 /* Sphere.cpp */,
+				A20C876B1EF9955F00732DB6 /* Cube.hpp */,
+				A20C876A1EF9955F00732DB6 /* Cube.cpp */,
+				A20C87681EF96FB900732DB6 /* Rectangle.hpp */,
+				A20C87671EF96FB900732DB6 /* Rectangle.cpp */,
+				A20C877A1EFB6DD600732DB6 /* Circle.hpp */,
+				A20C87791EFB6DD600732DB6 /* Circle.cpp */,
+				A20C87501EF769F700732DB6 /* Object.hpp */,
+				A20C874F1EF769F700732DB6 /* Object.cpp */,
+				A20C87771EFB540000732DB6 /* Triangle.hpp */,
+				A20C87761EFB540000732DB6 /* Triangle.cpp */,
+				A20C87741EFADA5E00732DB6 /* BezierModel.hpp */,
+				A20C87731EFADA5E00732DB6 /* BezierModel.cpp */,
+			);
+			name = Objects;
+			sourceTree = "<group>";
+		};
+		A20C877E1EFB7B2F00732DB6 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				A20C87381EF7465E00732DB6 /* Vec3D.hpp */,
+				A20C87371EF7465E00732DB6 /* Vec3D.cpp */,
+				A20C87351EF73CE800732DB6 /* Utility.hpp */,
+				A20C87341EF73CE800732DB6 /* Utility.cpp */,
+				A20C873E1EF754E000732DB6 /* ImageIO.hpp */,
+				A20C873D1EF754E000732DB6 /* ImageIO.cpp */,
+				A20C873B1EF74EA100732DB6 /* Color.hpp */,
+				A20C873A1EF74EA100732DB6 /* Color.cpp */,
+				A20C874A1EF765D700732DB6 /* Ray.hpp */,
+				A20C87491EF765D700732DB6 /* Ray.cpp */,
+				A20C87471EF763EC00732DB6 /* BBox.hpp */,
+				A20C87461EF763EC00732DB6 /* BBox.cpp */,
+				A20C87711EFAC8A300732DB6 /* BezierCurve.hpp */,
+				A20C87701EFAC8A300732DB6 /* BezierCurve.cpp */,
+			);
+			name = Utility;
+			sourceTree = "<group>";
+		};
 		A2FD95111EF48E99000F01FF = {
 			isa = PBXGroup;
 			children = (
@@ -115,45 +180,14 @@
 		A2FD951C1EF48E99000F01FF /* Papaya */ = {
 			isa = PBXGroup;
 			children = (
+				A20C877E1EFB7B2F00732DB6 /* Utility */,
+				A20C877D1EFB7B0800732DB6 /* Objects */,
+				A20C877C1EFB7AD700732DB6 /* Materials */,
 				A2FD95241EF48EE7000F01FF /* main.cpp */,
-				A20C876B1EF9955F00732DB6 /* Cube.hpp */,
-				A20C876A1EF9955F00732DB6 /* Cube.cpp */,
-				A20C87651EF96B5700732DB6 /* Light.hpp */,
-				A20C87641EF96B5700732DB6 /* Light.cpp */,
-				A20C87381EF7465E00732DB6 /* Vec3D.hpp */,
-				A20C87371EF7465E00732DB6 /* Vec3D.cpp */,
-				A20C87351EF73CE800732DB6 /* Utility.hpp */,
-				A20C87341EF73CE800732DB6 /* Utility.cpp */,
-				A20C873E1EF754E000732DB6 /* ImageIO.hpp */,
-				A20C873D1EF754E000732DB6 /* ImageIO.cpp */,
-				A20C873B1EF74EA100732DB6 /* Color.hpp */,
-				A20C873A1EF74EA100732DB6 /* Color.cpp */,
-				A20C874A1EF765D700732DB6 /* Ray.hpp */,
-				A20C87491EF765D700732DB6 /* Ray.cpp */,
 				A20C87411EF7572C00732DB6 /* Canvas.hpp */,
 				A20C87401EF7572C00732DB6 /* Canvas.cpp */,
 				A20C875F1EF77A4300732DB6 /* Camera.hpp */,
 				A20C875E1EF77A4300732DB6 /* Camera.cpp */,
-				A20C874D1EF7690800732DB6 /* BVH.hpp */,
-				A20C874C1EF7690800732DB6 /* BVH.cpp */,
-				A20C87471EF763EC00732DB6 /* BBox.hpp */,
-				A20C87461EF763EC00732DB6 /* BBox.cpp */,
-				A20C87591EF7773F00732DB6 /* Sphere.hpp */,
-				A20C87581EF7773F00732DB6 /* Sphere.cpp */,
-				A20C87681EF96FB900732DB6 /* Rectangle.hpp */,
-				A20C87671EF96FB900732DB6 /* Rectangle.cpp */,
-				A20C87531EF76A4000732DB6 /* HitRecord.hpp */,
-				A20C87521EF76A4000732DB6 /* HitRecord.cpp */,
-				A20C875C1EF7777800732DB6 /* Material.hpp */,
-				A20C875B1EF7777800732DB6 /* Material.cpp */,
-				A20C87441EF75B0000732DB6 /* Texture.hpp */,
-				A20C87431EF75B0000732DB6 /* Texture.cpp */,
-				A20C87501EF769F700732DB6 /* Object.hpp */,
-				A20C874F1EF769F700732DB6 /* Object.cpp */,
-				A20C87741EFADA5E00732DB6 /* BezierModel.hpp */,
-				A20C87731EFADA5E00732DB6 /* BezierModel.cpp */,
-				A20C87711EFAC8A300732DB6 /* BezierCurve.hpp */,
-				A20C87701EFAC8A300732DB6 /* BezierCurve.cpp */,
 			);
 			name = Papaya;
 			path = ../Sources;
@@ -226,8 +260,10 @@
 				A20C875A1EF7773F00732DB6 /* Sphere.cpp in Sources */,
 				A20C874E1EF7690800732DB6 /* BVH.cpp in Sources */,
 				A20C87481EF763EC00732DB6 /* BBox.cpp in Sources */,
+				A20C87781EFB540000732DB6 /* Triangle.cpp in Sources */,
 				A20C87451EF75B0000732DB6 /* Texture.cpp in Sources */,
 				A20C875D1EF7777800732DB6 /* Material.cpp in Sources */,
+				A20C877B1EFB6DD600732DB6 /* Circle.cpp in Sources */,
 				A20C873C1EF74EA100732DB6 /* Color.cpp in Sources */,
 				A2FD95251EF48EE7000F01FF /* main.cpp in Sources */,
 				A20C873F1EF754E000732DB6 /* ImageIO.cpp in Sources */,
