@@ -9,27 +9,27 @@
 #include "ImageIO.hpp"
 
 void BMPIO::importImage(vector<vector<Vec3D>> &pixels, const string &fileName) {
-
+	// TO DO
 }
 
 void BMPIO::exportImage(const vector<vector<Vec3D>> &pixels, const string &fileName) {
-
+	// TO DO
 }
 
 void JPGIO::importImage(vector<vector<Vec3D>> &pixels, const string &fileName) {
-	
+	// TO DO
 }
 
 void JPGIO::exportImage(const vector<vector<Vec3D>> &pixels, const string &fileName) {
-	
+	// TO DO
 }
 
 void PNGIO::importImage(vector<vector<Vec3D>> &pixels, const string &fileName) {
-	
+	// TO DO
 }
 
 void PNGIO::exportImage(const vector<vector<Vec3D>> &pixels, const string &fileName) {
-	
+	// TO DO
 }
 
 void PPMIO::importImage(vector<vector<Vec3D>> &pixels, const string &fileName) {

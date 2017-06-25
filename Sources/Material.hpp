@@ -55,8 +55,8 @@ class GeneralMaterial: public Material {
 protected:
 	Vec3D proportion;
 	Texture *texture;
-	Vec3D refract_color;
 	double fuzz;
+	Vec3D refract_color;
 	double ref_idx;
 public:
 	GeneralMaterial(const Vec3D &proportion, const Vec3D &reflect_color, double fuzz, const Vec3D &refract_color, double ref_idx);

@@ -47,3 +47,21 @@ BVH *ObjParser::read(const string &file_name, Material *material, double scale) 
 	}
 	return new BVH(list, count, 0, 1);
 }
+
+void ObjParser::write(const string &file_name, BezierModel *model) const {
+	ofstream ofs;
+	ofs.open(file_name, std::ios::out);
+	for (double i = 0; i <= 1; i += 0.1) {
+		for (double j = 0; j <= 6.2; j += 0.1) {
+			Vec3D point = model->pointAt(i, j);
+			ofs << "v " << point.x << " " << point.y << " " << point.z << "\n";
+		}
+	}
+	for (int i = 1; i < 569; i += 63) {
+		ofs << "f " << i << " " << (i + 63) << " " << (i + 125) << " " << (i + 62) << "\n";
+		for (int j = 0; j < 62; j++) {
+			ofs << "f " << (i + j) << " " << (i + j + 1) << " " << (i + j + 64) << " " << (i + j + 63) << "\n";
+		}
+	}
+	ofs.close();
+}

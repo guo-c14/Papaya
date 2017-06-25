@@ -8,21 +8,25 @@
 
 #include <iostream>
 #include "Scene.hpp"
+#include "Canvas.hpp"
 
 int main(int argc, const char *argv[]) {
 	Camera camera;
 	int n, width, height;
 	Object **list = bezier_curve(camera, n, width, height);
 	Object *scene = new BVH(list, n, 0, 1);
-	std::cout << "预处理完毕，开始渲染" << std::endl;
-#ifdef XCODE
-	Canvas canvas(width, height, 8, 64);
-	canvas.render(camera, scene, 4);
-	canvas.exportImage("../../../Outputs/bezier_curve.ppm", ppm);
-#else
-	Canvas canvas(width, height, 512, 64);
-	canvas.render(camera, scene, 8);
-	canvas.exportImage("../Outputs/bezier_curve.ppm", ppm);
-#endif
+	std::cout << "场景读取完毕，开始渲染" << std::endl;
+	Texture *texture = new ImageTexture(TEXTURES_DIRECTORY + "Room.ppm", ppm, 2048, 1024);
+	Canvas canvas(width, height, 512, 64, texture);
+	canvas.render(camera, scene, 4, true);
+	canvas.exportImage(OUTPUTS_DIRECTORY + "bezier_curve.ppm", ppm);
+//	Material *china = new GeneralMaterial({0, 1, 0}, new ImageTexture(TEXTURES_DIRECTORY + "China.ppm", ppm, 560, 444), 0.02, {0.5, 0.5, 1}, 1.4);
+//	vector<Vec3D> points{{40, 0, 0}, {150, 50, 0}, {150, 150, 0}, {0, 150, 0}, {60, 300, 0}};
+//	BezierModel *model = new BezierModel{
+//			BezierCurve(points),
+//			china
+//	};
+//	ObjParser parser;
+//	parser.write(MODELS_DIRECTORY + "BezierModel.obj", model);
 	return 0;
 }

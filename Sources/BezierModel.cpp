@@ -6,12 +6,7 @@
 //  Copyright © 2017 Guo Chen. All rights reserved.
 //
 
-#include <iostream>
-#include <Eigen/Dense>
 #include "BezierModel.hpp"
-
-using Eigen::Matrix3d;
-using Eigen::Vector3d;
 
 BezierModel::BezierModel(const BezierCurve &curve, Material *material): curve(curve), material(material) {
 	double x_max, y_min, y_max;
@@ -49,7 +44,7 @@ bool BezierModel::hit(const Ray &ray, double tmin, double tmax, HitRecord &recor
 	matrix(2, 0) = ray.direction.z;
 	matrix(1, 2) = 0;
 	int depth = 0;
-	while (depth < 64 && delta.dot(delta) >= 0.0001) {
+	while (depth < 64 && delta.dot(delta) >= 0.000001) {
 		solution = next_solution;
 		value = curve.pointAt(solution[1]);
 		derivative = curve.tangent(solution[1]);
@@ -75,7 +70,7 @@ bool BezierModel::hit(const Ray &ray, double tmin, double tmax, HitRecord &recor
 	if (dot(ray.direction, normalAt(next_solution[1], next_solution[2])) >= 0) {
 		depth = 0;
 		next_solution = {next_solution[0] * 0.5, 1 - next_solution[1], next_solution[2] + PI};
-		while (depth < 64 && delta.dot(delta) >= 0.0001) {
+		while (depth < 64 && delta.dot(delta) >= 0.000001) {
 			solution = next_solution;
 			value = curve.pointAt(solution[1]);
 			derivative = curve.tangent(solution[1]);

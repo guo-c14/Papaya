@@ -6,8 +6,6 @@
 //  Copyright © 2017 Guo Chen. All rights reserved.
 //
 
-#include <cstdlib>
-#include <iostream>
 #include "BVH.hpp"
 
 inline int compareX(const void *a, const void *b) {

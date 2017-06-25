@@ -9,7 +9,9 @@
 #ifndef Utility_hpp
 #define Utility_hpp
 
+#include <functional>
 #include <limits>
+#include <random>
 #include "Vec3D.hpp"
 
 const double PI_2 = 6.283185307179586;

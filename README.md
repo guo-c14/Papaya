@@ -72,6 +72,14 @@ C++ Path Tracer (路径追踪器)
 
 ### 网格模型
 
-![](Outputs/Dragon.ppm)
+![](Outputs/dragon.ppm)
+
+### Cornell Box + Dragon + 景深
 
 ![](Outputs/DragonCornell.ppm)
+
+### 贝塞尔曲线旋转面 + 环境光贴图 + 网格模型 + 景深
+
+![](Outputs/BezierCurve.ppm)
+
+![](Outputs/bezier_curve.ppm)

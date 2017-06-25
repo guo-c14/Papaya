@@ -15,10 +15,3 @@ Ray::Ray(const Vec3D &origin, const Vec3D &direction, double time):
 
 Ray::Ray(const Ray &ray): origin(ray.origin), direction(ray.direction),
 	time(ray.time) {}
-
-Ray &Ray::operator=(const Ray &ray) {
-	origin = ray.origin;
-	direction = ray.direction;
-	time = ray.time;
-	return *this;
-}

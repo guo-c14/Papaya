@@ -9,9 +9,13 @@
 #ifndef BezierModel_hpp
 #define BezierModel_hpp
 
+#include <Eigen/Dense>
 #include "Object.hpp"
 #include "BezierCurve.hpp"
 #include "Material.hpp"
+
+using Eigen::Matrix3d;
+using Eigen::Vector3d;
 
 class BezierModel: public Object {
 protected:
@@ -35,7 +39,7 @@ inline Vec3D BezierModel::normalAt(double u, double v) const {
 	Vec3D temp = curve.tangent(u);
 	temp.z = -temp.x * sin(v);
 	temp.x *= cos(v);
-	Vec3D temp1{-sin(v), 0, cos(v)};
+	Vec3D temp1{-sin(v), 0, -cos(v)};
 	return normalize(cross(temp1, temp));
 }
 

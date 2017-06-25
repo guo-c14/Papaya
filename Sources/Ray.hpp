@@ -23,6 +23,13 @@ public:
 	Vec3D pointAt(double t) const;
 };
 
+inline Ray &Ray::operator=(const Ray &ray) {
+	origin = ray.origin;
+	direction = ray.direction;
+	time = ray.time;
+	return *this;
+}
+
 inline Vec3D Ray::pointAt(double t) const {
 	return origin + direction * t;
 }

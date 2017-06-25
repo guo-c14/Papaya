@@ -6,9 +6,6 @@
 //  Copyright © 2017 Guo Chen. All rights reserved.
 //
 
-#include <ctime>
-#include <random>
-#include <functional>
 #include "Utility.hpp"
 
 double drand() {

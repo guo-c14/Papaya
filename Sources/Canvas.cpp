@@ -12,20 +12,11 @@
 
 using std::thread;
 
-Canvas::Canvas(int width, int height, int samples_per_pixel, int iteration_depth):
-width(width), height(height), samples_per_pixel(samples_per_pixel),
-iteration_depth(iteration_depth) {
+Canvas::Canvas(int width, int height, int samples_per_pixel, int iteration_depth, Texture *texture): width(width), height(height), samples_per_pixel(samples_per_pixel), iteration_depth(iteration_depth), texture(texture) {
 	pixels = vector<vector<Vec3D>>(height);
 	for (int i = 0; i < height; i++) {
 		pixels[i] = vector<Vec3D>(width);
 	}
-#ifdef XCODE
-	texture = new ImageTexture("../../../Textures/Room.ppm", ppm, 2048, 1024);
-//	texture = new ImageTexture("../../../Textures/Home.ppm", ppm, 4000, 2000);
-#else
-	//	texture = new ImageTexture("../Textures/Room.ppm", ppm, 2048, 1024);
-//	texture = new ImageTexture("../Textures/Home.ppm", ppm, 4000, 2000);
-#endif
 }
 
 Vec3D Canvas::computeColor(const Ray &ray, const Object *scene, int depth) {
@@ -39,16 +30,17 @@ Vec3D Canvas::computeColor(const Ray &ray, const Object *scene, int depth) {
 		} else {
 			return emitted;
 		}
-	}
-	else {
-//		return 0;
+	} else if (use_ambient_light && texture != nullptr) {
 		return texture->value(0.5 - 0.5 * ray.direction.x, 0.5 * ray.direction.y + 0.5, 0);
+	} else {
+		return 0;
 	}
 }
 
-void Canvas::render(const Camera &camera, Object *scene, int threads_num) {
+void Canvas::render(const Camera &camera, Object *scene, int threads_num, bool use_ambient_light) {
 	this->camera = camera;
 	this->scene = scene;
+	this->use_ambient_light = use_ambient_light;
 	if (threads_num < 1) {
 		threads_num = 1;
 	} else if (threads_num > 16) {
@@ -58,10 +50,10 @@ void Canvas::render(const Camera &camera, Object *scene, int threads_num) {
 	int divide = height / threads_num;
 	for (int i = 0; i < threads_num - 1; i++) {
 		threads[i] = thread(&Canvas::callFromThread, this, i * divide,
-			(i + 1) * divide);
+							(i + 1) * divide);
 	}
 	threads[threads_num - 1] = thread(&Canvas::callFromThread, this,
-		(threads_num - 1) * divide, height);
+									  (threads_num - 1) * divide, height);
 	for (int i = 0; i < threads_num; i++) {
 		threads[i].join();
 	}

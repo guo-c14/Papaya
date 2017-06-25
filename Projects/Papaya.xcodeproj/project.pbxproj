@@ -26,7 +26,6 @@
 		A20C87721EFAC8A300732DB6 /* BezierCurve.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A20C87701EFAC8A300732DB6 /* BezierCurve.cpp */; };
 		A20C87751EFADA5E00732DB6 /* BezierModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A20C87731EFADA5E00732DB6 /* BezierModel.cpp */; };
 		A20C87781EFB540000732DB6 /* Triangle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A20C87761EFB540000732DB6 /* Triangle.cpp */; };
-		A20C877B1EFB6DD600732DB6 /* Circle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A20C87791EFB6DD600732DB6 /* Circle.cpp */; };
 		A20C87811EFBFEFE00732DB6 /* ObjParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A20C877F1EFBFEFE00732DB6 /* ObjParser.cpp */; };
 		A2FD95251EF48EE7000F01FF /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2FD95241EF48EE7000F01FF /* main.cpp */; };
 /* End PBXBuildFile section */
@@ -83,11 +82,10 @@
 		A20C87741EFADA5E00732DB6 /* BezierModel.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BezierModel.hpp; sourceTree = "<group>"; };
 		A20C87761EFB540000732DB6 /* Triangle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Triangle.cpp; sourceTree = "<group>"; };
 		A20C87771EFB540000732DB6 /* Triangle.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Triangle.hpp; sourceTree = "<group>"; };
-		A20C87791EFB6DD600732DB6 /* Circle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Circle.cpp; sourceTree = "<group>"; };
-		A20C877A1EFB6DD600732DB6 /* Circle.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Circle.hpp; sourceTree = "<group>"; };
 		A20C877F1EFBFEFE00732DB6 /* ObjParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ObjParser.cpp; sourceTree = "<group>"; };
 		A20C87801EFBFEFE00732DB6 /* ObjParser.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ObjParser.hpp; sourceTree = "<group>"; };
 		A20C87821EFCB6D200732DB6 /* Scene.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Scene.hpp; sourceTree = "<group>"; };
+		A22F1D0D1EFF640C00654A95 /* config.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = config.hpp; sourceTree = "<group>"; };
 		A2FD951A1EF48E99000F01FF /* Papaya */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Papaya; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2FD95241EF48EE7000F01FF /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -124,12 +122,10 @@
 				A20C874C1EF7690800732DB6 /* BVH.cpp */,
 				A20C87591EF7773F00732DB6 /* Sphere.hpp */,
 				A20C87581EF7773F00732DB6 /* Sphere.cpp */,
-				A20C876B1EF9955F00732DB6 /* Cube.hpp */,
-				A20C876A1EF9955F00732DB6 /* Cube.cpp */,
 				A20C87681EF96FB900732DB6 /* Rectangle.hpp */,
 				A20C87671EF96FB900732DB6 /* Rectangle.cpp */,
-				A20C877A1EFB6DD600732DB6 /* Circle.hpp */,
-				A20C87791EFB6DD600732DB6 /* Circle.cpp */,
+				A20C876B1EF9955F00732DB6 /* Cube.hpp */,
+				A20C876A1EF9955F00732DB6 /* Cube.cpp */,
 				A20C87501EF769F700732DB6 /* Object.hpp */,
 				A20C874F1EF769F700732DB6 /* Object.cpp */,
 				A20C87771EFB540000732DB6 /* Triangle.hpp */,
@@ -187,6 +183,7 @@
 				A20C877D1EFB7B0800732DB6 /* Objects */,
 				A20C877C1EFB7AD700732DB6 /* Materials */,
 				A2FD95241EF48EE7000F01FF /* main.cpp */,
+				A22F1D0D1EFF640C00654A95 /* config.hpp */,
 				A20C87821EFCB6D200732DB6 /* Scene.hpp */,
 				A20C87411EF7572C00732DB6 /* Canvas.hpp */,
 				A20C87401EF7572C00732DB6 /* Canvas.cpp */,
@@ -268,7 +265,6 @@
 				A20C87811EFBFEFE00732DB6 /* ObjParser.cpp in Sources */,
 				A20C87451EF75B0000732DB6 /* Texture.cpp in Sources */,
 				A20C875D1EF7777800732DB6 /* Material.cpp in Sources */,
-				A20C877B1EFB6DD600732DB6 /* Circle.cpp in Sources */,
 				A20C873C1EF74EA100732DB6 /* Color.cpp in Sources */,
 				A2FD95251EF48EE7000F01FF /* main.cpp in Sources */,
 				A20C873F1EF754E000732DB6 /* ImageIO.cpp in Sources */,
